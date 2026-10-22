@@ -5,8 +5,8 @@ backend:
   name: github
   repo: rkcthirdcoast/rkc-website
   branch: main
-  # Cloudflare Worker that handles GitHub login. Replace with the real URL once Tim deploys it.
-  base_url: https://REPLACE-WITH-WORKER-URL.workers.dev
+  # Cloudflare Worker that handles GitHub login (sveltia-cms-auth).
+  base_url: https://sveltia-cms-auth.tim-d45.workers.dev
 
 # Interns' edits are saved as drafts (pull requests) and go live only after approval.
 publish_mode: editorial_workflow
