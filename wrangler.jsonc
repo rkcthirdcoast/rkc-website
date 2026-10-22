@@ -4,6 +4,8 @@
   "name": "rkc-website",
   "compatibility_date": "2026-10-01",
   "previews": {},
+  "workers_dev": false,
+  "preview_urls": true,
   "assets": {
     "directory": "."
   }
