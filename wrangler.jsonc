@@ -3,6 +3,7 @@
   // Files listed in .assetsignore are never published.
   "name": "rkc-website",
   "compatibility_date": "2026-10-01",
+  "previews": {},
   "assets": {
     "directory": "."
   }
