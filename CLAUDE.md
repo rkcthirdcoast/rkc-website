@@ -54,6 +54,8 @@ fonts/             self-hosted Poppins 400/600/700 (OFL license included)
 style-sample.html  approved component sample (rkc.css v0.1); reference only
 CLAUDE.md          this file
 AGENTS.md          points other AI tools here
+wrangler.jsonc     Cloudflare Workers config; serves the repo root as static files
+.assetsignore      files never published (docs, config); add new repo-only files here
 ```
 
 Pages, the content editor config and `_redirects` are added as the build proceeds; update this section when they are.
