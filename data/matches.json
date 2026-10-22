@@ -1,0 +1,13 @@
+{
+  "matches": [
+    {
+      "team": "USL W League",
+      "date": "2027-05-29T19:00:00-05:00",
+      "opponent": "Test Opponent FC",
+      "home_away": "Home",
+      "venue": "Pritchard Park Stadium, Racine",
+      "status": "Upcoming",
+      "ticket_url": ""
+    }
+  ]
+}

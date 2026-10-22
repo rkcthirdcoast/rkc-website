@@ -1,0 +1,39 @@
+# RKC site editor (Sveltia CMS). LOGIN TEST version: one content type only.
+# The full content types from the brief are added after the test passes.
+
+backend:
+  name: github
+  repo: rkcthirdcoast/rkc-website
+  branch: main
+  # Cloudflare Worker that handles GitHub login. Replace with the real URL once Tim deploys it.
+  base_url: https://REPLACE-WITH-WORKER-URL.workers.dev
+
+# Interns' edits are saved as drafts (pull requests) and go live only after approval.
+publish_mode: editorial_workflow
+
+media_folder: images/uploads
+public_folder: /images/uploads
+
+collections:
+  - name: matches
+    label: Matches
+    files:
+      - name: match_list
+        label: Match list
+        file: data/matches.json
+        fields:
+          - name: matches
+            label: Matches
+            label_singular: Match
+            widget: list
+            summary: "{{fields.date}} · {{fields.team}} vs {{fields.opponent}}"
+            fields:
+              - { name: team, label: Team, widget: select, options: ["USL League Two", "USL W League", "MWPL"] }
+              - { name: date, label: Date and kickoff, widget: datetime }
+              - { name: opponent, label: Opponent, widget: string }
+              - { name: home_away, label: Home or away, widget: select, options: ["Home", "Away"] }
+              - { name: venue, label: Venue, widget: string, default: "Pritchard Park Stadium, Racine" }
+              - { name: status, label: Status, widget: select, options: ["Upcoming", "Final", "Postponed"], default: "Upcoming" }
+              - { name: rkc_score, label: RKC score, widget: number, required: false }
+              - { name: opponent_score, label: Opponent score, widget: number, required: false }
+              - { name: ticket_url, label: Ticket link, widget: string, required: false }
