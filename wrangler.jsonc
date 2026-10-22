@@ -4,6 +4,8 @@
 {
   "name": "rkc-website",
   "compatibility_date": "2026-10-01",
+"previews": {},
+"preview_urls": true,
   "assets": {
     "directory": ".",
     "not_found_handling": "404-page",
