@@ -1,0 +1,6 @@
+# Repo files that must never be published on the live site
+.git
+.gitignore
+.assetsignore
+*.md
+wrangler.jsonc
