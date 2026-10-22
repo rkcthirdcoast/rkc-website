@@ -1,0 +1,12 @@
+// Cloudflare settings for rkcthirdcoast.com.
+// The site is plain files: serve the repo folder as static assets.
+// Files listed in .assetsignore are kept out of the public site.
+{
+  "name": "rkc-website",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": ".",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash"
+  }
+}
