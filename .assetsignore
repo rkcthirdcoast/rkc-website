@@ -4,3 +4,4 @@
 .assetsignore
 *.md
 wrangler.jsonc
+.wrangler
