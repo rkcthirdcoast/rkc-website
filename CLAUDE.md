@@ -56,6 +56,9 @@ CLAUDE.md          this file
 AGENTS.md          points other AI tools here
 wrangler.jsonc     Cloudflare settings (serves the repo as the site)
 .assetsignore      repo files kept off the public site
+admin/             site editor (Sveltia CMS): index.html + config.yml. Content types and fields live in config.yml
+content/           what interns edit: matches/, news/, players/, partners/, staff/, settings.yml. Never hand-edit facts into pages
+images/uploads/    images uploaded through the editor (converted to WebP, 5 MB limit)
 ```
 
-Pages, the content editor config and `_redirects` are added as the build proceeds; update this section when they are.
+Pages, the Eleventy build and `_redirects` are added as the build proceeds; update this section when they are.
