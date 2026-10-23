@@ -17,7 +17,7 @@
   <div class="match__meta">
     {%- if m.status == "postponed" %}<span class="status status--postponed">Postponed</span>
     {%- elif final %}<span class="status status--final">Final</span>
-    {%- elif next %}<span class="status status--next">Next up</span>
+    {%- elif next %}<span class="status status--next">{{ "Next up" if m.home_away == "home" else "Next match" }}</span>
     {%- else %}<span class="status status--next">{{ "Home" if m.home_away == "home" else "Away" }}</span>{% endif %}
     <span class="label label--quiet">{{ m.team | teamLabel }}</span>
   </div>
@@ -37,6 +37,8 @@
     {% if m.ticket_link %}<a class="btn btn--primary" href="{{ m.ticket_link }}">Get Tickets</a>{% endif %}
     <a class="btn btn--secondary" href="/visit/">Plan Your Visit</a>
   </div>
+  {%- elif next and not final and m.home_away == "away" %}
+  <div class="btn-row"><a class="btn btn--secondary" href="/matches/">Match Details</a></div>
   {%- endif %}
   {%- if final and m.match_report %}
   <a class="link-arrow" href="/news/{{ m.match_report }}/">Match Report</a>
