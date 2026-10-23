@@ -18,8 +18,8 @@ export default [
     code: "mwpl",
     league: "Midwest Premier League",
     playForm: "/play/#men",
-    // Brief: "Group A" stays out until the group name for next season is verified.
+    // Division confirmed by Tim, 2026-10-23.
     intro:
-      "Our MWPL side plays in the Midwest Premier League. It gives more players real minutes under the same club standards and coaching as our USL teams.",
+      "Our MWPL side plays in the Heartland Conference – Division 1 of the Midwest Premier League. It gives more players real minutes under the same club standards and coaching as our USL teams.",
   },
 ];
