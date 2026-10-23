@@ -3,6 +3,7 @@ export default {
   name: "RKC Third Coast FC",
   url: "https://rkcthirdcoast.com",
   shop: "https://shop.rkcthirdcoast.com",
+  instagram: "https://www.instagram.com/rkcthirdcoast/",
   // Until launch, ask search engines not to index the preview addresses.
   prelaunch: true,
   nav: [
