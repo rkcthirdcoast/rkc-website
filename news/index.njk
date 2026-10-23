@@ -1,0 +1,31 @@
+---
+layout: layouts/base.njk
+title: News
+description: Match reports, signings and club updates from RKC Third Coast FC.
+permalink: /news/
+---
+{%- from "partials/news-card.njk" import newsCard -%}
+{%- set posts = (collections.news or []) | reverse -%}
+<section class="section">
+  <div class="wrap">
+    <div class="section__head">
+      <div class="stack">
+        <h1>News</h1>
+        <p class="match__venue">Match reports, signings, community work and club updates.</p>
+      </div>
+    </div>
+    {%- if posts.length %}
+    <div class="filters" role="group" aria-label="Filter news" aria-controls="news-list">
+      <button class="chip" type="button" data-filter="all" aria-pressed="true">All</button>
+      <button class="chip" type="button" data-filter="men" aria-pressed="false">Men</button>
+      <button class="chip" type="button" data-filter="women" aria-pressed="false">Women</button>
+      <button class="chip" type="button" data-filter="mwpl" aria-pressed="false">MWPL</button>
+      <button class="chip" type="button" data-filter="club" aria-pressed="false">Club</button>
+    </div>
+    <p class="label label--quiet" data-filter-status="news-list" aria-live="polite"></p>
+    <div class="grid grid--3" id="news-list">{% for post in posts %}{{ newsCard(post) }}{% endfor %}</div>
+    {%- else %}
+    <p class="match__venue">No news yet. Follow <a href="{{ site.instagram }}">@rkcthirdcoast</a> for the latest.</p>
+    {%- endif %}
+  </div>
+</section>

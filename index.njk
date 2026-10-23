@@ -1,9 +1,28 @@
 ---
 layout: layouts/base.njk
-description: RKC Third Coast FC plays USL League Two, USL W League and Midwest Premier League soccer at Pritchard Park Stadium in Racine, Wisconsin.
+seoTitle: "RKC Third Coast FC · Soccer in Racine, WI"
+description: "Men's, women's and MWPL soccer at Pritchard Park in Racine. Schedule, tickets and club news from RKC Third Coast FC."
+schema:
+  "@context": "https://schema.org"
+  "@type": SportsOrganization
+  name: RKC Third Coast FC
+  sport: Soccer
+  url: https://rkcthirdcoast.com
+  logo: https://rkcthirdcoast.com/images/brand/rkc-crest.svg
+  location:
+    "@type": StadiumOrArena
+    name: Pritchard Park Stadium
+    address:
+      "@type": PostalAddress
+      streetAddress: 2800 Ohio St
+      addressLocality: Racine
+      addressRegion: WI
+      postalCode: "53406"
+      addressCountry: US
 permalink: /
 ---
 {%- from "partials/match.njk" import matchCard -%}
+{%- from "partials/news-card.njk" import newsCard -%}
 {%- set inSeason = settings.season_mode == "in_season" -%}
 {%- set nextMatch = (matches | upcoming)[0] -%}
 {%- set lastResult = (matches | results)[0] -%}
@@ -70,14 +89,7 @@ permalink: /
   <div class="wrap">
     <div class="section__head"><h2 id="news-h">Latest news</h2><a class="link-arrow" href="/news/">All News</a></div>
     <div class="grid grid--3">
-      {%- for post in latestNews | head(3) %}
-      <a class="news-card" href="{{ post.url }}">
-        {% if post.data.hero_photo %}<img class="news-card__img" src="{{ post.data.hero_photo }}" alt="{{ post.data.hero_photo_alt }}" loading="lazy">{% else %}<div class="news-card__img"></div>{% endif %}
-        <span class="label label--red">{{ post.data.team_tag | teamShort }}</span>
-        <span class="news-card__title">{{ post.data.title }}</span>
-        <span class="news-card__summary">{{ post.data.summary }}</span>
-      </a>
-      {%- endfor %}
+      {%- for post in latestNews | head(3) %}{{ newsCard(post) }}{% endfor %}
     </div>
   </div>
 </section>

@@ -1,0 +1,34 @@
+---
+layout: layouts/base.njk
+title: Contact
+description: Contact RKC Third Coast FC about tickets, groups, partnerships, media, volunteering or internships.
+permalink: /contact/
+showBottomBar: false
+---
+{%- from "partials/form.njk" import siteForm -%}
+<section class="section">
+  <div class="wrap split">
+    <div class="stack">
+      <h1>Contact us</h1>
+      <p class="match__venue">Pick a topic so your message goes to the right person.</p>
+      <p class="match__venue">Players: use the <a href="/play/">Player Interest Form</a> instead.</p>
+      <address class="prose">{{ site.stadium.name }}<br>{{ site.stadium.street }}, {{ site.stadium.city }}, {{ site.stadium.region }} {{ site.stadium.zip }}</address>
+      <p><a href="{{ site.instagram }}">@rkcthirdcoast</a>{% if settings.contact_email %}<br><a href="mailto:{{ settings.contact_email }}">{{ settings.contact_email }}</a>{% endif %}</p>
+    </div>
+    {% call siteForm("contact", "Send Message") %}
+      <div class="field"><label for="c-name">Name</label><input id="c-name" name="name" autocomplete="name" required></div>
+      <div class="field"><label for="c-email">Email</label><input id="c-email" name="email" type="email" inputmode="email" autocomplete="email" required></div>
+      <div class="field"><label for="c-phone">Phone (optional)</label><input id="c-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel"></div>
+      <div class="field"><label for="c-topic">Topic</label>
+        <select id="c-topic" name="topic">
+          <option value="general">General</option>
+          <option value="groups">Tickets and groups</option>
+          <option value="partnerships">Partnerships</option>
+          <option value="media">Media</option>
+          <option value="volunteering">Volunteering and internships</option>
+        </select>
+      </div>
+      <div class="field"><label for="c-msg">Message</label><textarea id="c-msg" name="message" required></textarea></div>
+    {% endcall %}
+  </div>
+</section>

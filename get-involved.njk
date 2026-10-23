@@ -1,0 +1,75 @@
+---
+layout: layouts/base.njk
+title: Get Involved
+description: Volunteer, intern, join a lake cleanup or donate to RKC Third Coast FC.
+permalink: /get-involved/
+showBottomBar: false
+---
+{%- from "partials/form.njk" import siteForm -%}
+<section class="section">
+  <div class="wrap stack">
+    <h1>Get involved</h1>
+    <p class="match__venue">There's a job for everyone who wants one.</p>
+  </div>
+</section>
+
+<section class="section section--mist" id="volunteer" aria-labelledby="volunteer-h">
+  <div class="wrap split">
+    <div class="stack">
+      <h2 id="volunteer-h">Volunteer</h2>
+      <p class="prose">Matchday runs on volunteers: gate, merch table, kids' activities, setup and teardown. Sign up once and we'll send the schedule.</p>
+    </div>
+    {% call siteForm("volunteer", "Volunteer Sign-Up") %}
+      <div class="field"><label for="v-name">Name</label><input id="v-name" name="name" autocomplete="name" required></div>
+      <div class="field"><label for="v-email">Email</label><input id="v-email" name="email" type="email" inputmode="email" autocomplete="email" required></div>
+      <div class="field"><label for="v-phone">Phone (optional)</label><input id="v-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel"></div>
+      <div class="field"><label for="v-role">What would you like to help with?</label>
+        <select id="v-role" name="role"><option>Anything</option><option>Gate</option><option>Merch table</option><option>Kids' activities</option><option>Setup and teardown</option></select>
+      </div>
+    {% endcall %}
+  </div>
+</section>
+
+<section class="section" id="internships" aria-labelledby="interns-h">
+  <div class="wrap stack">
+    <h2 id="interns-h">Internships</h2>
+    <p class="prose">Each season we take interns in social media, photography, design, PR and matchday operations. You'll do real work that goes out with the club's name on it.</p>
+    <div class="btn-row"><a class="btn btn--secondary" href="/contact/?topic=volunteering">Apply for an Internship</a></div>
+  </div>
+</section>
+
+<section class="section section--mist" id="cleanups" aria-labelledby="cleanups-h">
+  <div class="wrap stack">
+    <h2 id="cleanups-h">Lake cleanups</h2>
+    <p class="prose">Monthly at Eichelman Park in Kenosha. Bring gloves and a friend.</p>
+    {%- set dates = settings.cleanups or [] -%}
+    {%- if dates.length %}
+    <div class="fixture-list">
+      {%- for c in dates %}
+      <div class="fixture">
+        <p class="fixture__date label label--quiet num">{{ c.date | chicago('kickoff') }}</p>
+        <p class="fixture__opp">{{ c.location or "Eichelman Park, Kenosha" }}</p>
+        {% if c.note %}<div class="fixture__end"><span class="match__venue">{{ c.note }}</span></div>{% endif %}
+      </div>
+      {%- endfor %}
+    </div>
+    {%- else %}
+    <p class="match__venue">Dates are posted on Instagram as they're set. Follow <a href="{{ site.instagram }}">@rkcthirdcoast</a>.</p>
+    {%- endif %}
+    <div class="btn-row"><a class="btn btn--secondary" href="/contact/?topic=volunteering">Sign Up for a Cleanup</a></div>
+  </div>
+</section>
+
+<section class="section section--ink" id="donate" aria-labelledby="donate-h">
+  <div class="wrap stack">
+    <p class="label label--quiet">Donate</p>
+    <h2 id="donate-h">Help keep the club local</h2>
+    <p class="prose">RKC is becoming a nonprofit. Donations pay for things a ticket doesn't cover: field time, travel and lake programs. Zeffy charges the club no fees, so your full gift reaches RKC.</p>
+    {#- Brief VERIFY: tax-deductibility small print stays off until the accountant confirms the wording. -#}
+    {%- if settings.zeffy_form_url %}
+    <iframe class="donate-frame" title="Donate to RKC Third Coast FC" src="{{ settings.zeffy_form_url }}" loading="lazy" allowpaymentrequest allowtransparency="true"></iframe>
+    {%- else %}
+    <p class="label label--quiet">The donation form goes live once the club's Zeffy account is set up.</p>
+    {%- endif %}
+  </div>
+</section>

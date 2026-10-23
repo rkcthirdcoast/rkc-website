@@ -1,0 +1,73 @@
+---
+layout: layouts/base.njk
+title: Tickets
+description: Single, season and group tickets for RKC home matches at Pritchard Park in Racine.
+permalink: /tickets/
+showBottomBar: false
+---
+{%- from "partials/match.njk" import fixtureRow -%}
+{%- set t = settings.tickets or {} -%}
+{%- set inSeason = settings.season_mode == "in_season" -%}
+{%- set homeGames = matches | upcoming | homeOnly -%}
+<section class="section">
+  <div class="wrap stack">
+    <h1>Tickets</h1>
+    <p class="hero__sub match__venue">A summer night at Pritchard Park, close enough to hear the players talk.</p>
+  </div>
+</section>
+
+<section class="section section--mist" aria-label="Ticket options">
+  <div class="wrap grid grid--3">
+    {%- if inSeason %}
+    <article class="match">
+      <h2 class="match__when">Single match</h2>
+      {%- if t.adult_price or t.youth_price %}
+      <p>{% if t.adult_price %}Adults ${{ t.adult_price }}{% endif %}{% if t.adult_price and t.youth_price %}, {% endif %}{% if t.youth_price %}kids under 12 ${{ t.youth_price }}{% endif %}.</p>
+      {%- endif %}
+      <div class="btn-row"><a class="btn btn--primary" href="{{ t.single_match_link or '#home-matches' }}">Buy Tickets</a></div>
+    </article>
+    {%- endif %}
+    {%- if t.season_tickets_on_sale or inSeason %}
+    <article class="match{% if not inSeason %} match--next{% endif %}">
+      <h2 class="match__when">Season ticket</h2>
+      {#- Season ticket covers MWPL home matches: confirmed by Tim, 2026-10-23. -#}
+      <p>{% if t.season_ticket_price %}${{ t.season_ticket_price }} gets you into every RKC home match this season, across all three teams.{% else %}One ticket for every RKC home match this season, across all three teams.{% endif %}</p>
+      {%- if t.season_tickets_on_sale and t.season_ticket_link %}
+      <div class="btn-row"><a class="btn btn--primary" href="{{ t.season_ticket_link }}">Get Season Tickets</a></div>
+      {%- elif t.season_ticket_message %}
+      <p class="match__venue">{{ t.season_ticket_message }}</p>
+      {%- endif %}
+    </article>
+    {%- else %}
+    <article class="match match--next">
+      <h2 class="match__when">Season tickets</h2>
+      <p class="match__venue">{{ t.season_ticket_message or "Season tickets go on sale before the season. Follow @rkcthirdcoast to hear first." }}</p>
+    </article>
+    {%- endif %}
+    <article class="match">
+      <h2 class="match__when">Groups of 10 or more</h2>
+      <p>Bring your team, your company or a birthday crew. Groups get a discount and can add a matchday moment: walking out with the players, working as ball kids, a halftime shout-out, or a team photo after the match.</p>
+      <div class="btn-row"><a class="btn btn--secondary" href="/contact/?topic=groups">Request Group Tickets</a></div>
+    </article>
+  </div>
+</section>
+
+{%- if homeGames.length %}
+<section class="section" id="home-matches" aria-labelledby="home-h">
+  <div class="wrap">
+    <div class="section__head"><h2 id="home-h">Upcoming home matches</h2><a class="link-arrow" href="/matches/">All Matches</a></div>
+    <div class="fixture-list">{% for m in homeGames %}{{ fixtureRow(m) }}{% endfor %}</div>
+  </div>
+</section>
+{%- endif %}
+
+<section class="section section--mist" aria-labelledby="faq-h">
+  <div class="wrap split">
+    <div class="stack"><h2 id="faq-h">Questions</h2></div>
+    <div class="faq">
+      <details open><summary>Where is it?</summary><div>{{ site.stadium.name }}, {{ site.stadium.street }}, {{ site.stadium.city }}. Full directions are on the <a href="/visit/">Visit page</a>.</div></details>
+      {#- Toddlers free: confirmed by Tim, 2026-10-23. Brief VERIFY still open: rain policy and refunds stay off until confirmed. -#}
+      <details><summary>Do kids need a ticket?</summary><div>Kids under 12 need a youth ticket. Toddlers get in free.</div></details>
+    </div>
+  </div>
+</section>

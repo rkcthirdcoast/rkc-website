@@ -1,0 +1,42 @@
+---
+layout: layouts/base.njk
+title: Play for RKC
+description: Player interest forms for RKC Third Coast FC's men's (USL League Two and MWPL) and women's (USL W League) teams.
+permalink: /play/
+showBottomBar: false
+---
+{%- from "partials/form.njk" import siteForm -%}
+{%- macro playerFields(prefix) -%}
+<div class="field"><label for="{{ prefix }}-name">Name</label><input id="{{ prefix }}-name" name="name" autocomplete="name" required></div>
+<div class="field"><label for="{{ prefix }}-email">Email</label><input id="{{ prefix }}-email" name="email" type="email" inputmode="email" autocomplete="email" required></div>
+<div class="field"><label for="{{ prefix }}-phone">Phone (optional)</label><input id="{{ prefix }}-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel"></div>
+<div class="field"><label for="{{ prefix }}-pos">Position</label><select id="{{ prefix }}-pos" name="position"><option>Goalkeeper</option><option>Defender</option><option>Midfielder</option><option>Forward</option></select></div>
+<div class="field"><label for="{{ prefix }}-club">Current college or club</label><input id="{{ prefix }}-club" name="current_team"></div>
+<div class="field"><label for="{{ prefix }}-home">Hometown</label><input id="{{ prefix }}-home" name="hometown"></div>
+<div class="field"><label for="{{ prefix }}-video">Highlight video link (optional)</label><input id="{{ prefix }}-video" name="video" type="url" inputmode="url"></div>
+<div class="field"><label for="{{ prefix }}-msg">Anything else the coaches should know</label><textarea id="{{ prefix }}-msg" name="message"></textarea></div>
+{%- endmacro -%}
+<section class="section">
+  <div class="wrap stack">
+    <h1>Play for RKC</h1>
+    <p class="prose">We're looking for college and high-level amateur players who want a serious summer: real training, real matches, and staff who hold you to a professional standard. Fill in the form for your program and the coaches will reach out if there's a fit. A form doesn't guarantee a tryout.</p>
+  </div>
+</section>
+<section class="section section--mist" id="men" aria-labelledby="men-h">
+  <div class="wrap split">
+    <div class="stack">
+      <h2 id="men-h">Men</h2>
+      <p class="match__venue">USL League Two and Midwest Premier League. Goes to the men's program staff.</p>
+    </div>
+    {% call siteForm("player-men", "Send to the Men's Staff", "men-form") %}{{ playerFields("m") }}{% endcall %}
+  </div>
+</section>
+<section class="section" id="women" aria-labelledby="women-h">
+  <div class="wrap split">
+    <div class="stack">
+      <h2 id="women-h">Women</h2>
+      <p class="match__venue">USL W League. Goes to the women's program staff.</p>
+    </div>
+    {% call siteForm("player-women", "Send to the Women's Staff", "women-form") %}{{ playerFields("w") }}{% endcall %}
+  </div>
+</section>

@@ -23,10 +23,24 @@
       chip.addEventListener("click", function () {
         chips.forEach(function (c) { c.setAttribute("aria-pressed", String(c === chip)); });
         var f = chip.dataset.filter;
+        var shown = 0;
         list.querySelectorAll("[data-team]").forEach(function (r) {
           r.hidden = !(f === "all" || r.dataset.team === f || r.dataset.venue === f);
+          if (!r.hidden) shown++;
         });
+        var status = document.querySelector('[data-filter-status="' + list.id + '"]');
+        if (status) status.textContent = shown + (shown === 1 ? " result" : " results");
       });
     });
+  });
+
+  // Contact form: preselect the topic from ?topic=groups etc.
+  var topic = new URLSearchParams(location.search).get("topic");
+  var select = document.getElementById("c-topic");
+  if (topic && select && select.querySelector('option[value="' + topic + '"]')) select.value = topic;
+
+  // Forms that aren't connected yet never submit.
+  document.querySelectorAll("form[data-offline]").forEach(function (f) {
+    f.addEventListener("submit", function (e) { e.preventDefault(); });
   });
 })();

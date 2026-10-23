@@ -5,10 +5,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>{% if title %}{{ title }} · {% endif %}{{ site.name }}</title>
+<title>{% if seoTitle %}{{ seoTitle }}{% elif title %}{{ title }} · {{ site.name }}{% else %}{{ site.name }}{% endif %}</title>
 {% if description %}<meta name="description" content="{{ description }}">{% endif %}
 {% if site.prelaunch or noindex %}<meta name="robots" content="noindex">{% endif %}
 <link rel="stylesheet" href="/rkc.css">
+{% if schema %}<script type="application/ld+json">{{ schema | dump | safe }}</script>{% endif %}
 <script src="/site.js" defer></script>
 </head>
 <body>

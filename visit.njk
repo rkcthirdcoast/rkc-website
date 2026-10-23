@@ -1,0 +1,38 @@
+---
+layout: layouts/base.njk
+title: Visit Pritchard Park
+description: Address, food, weather tips and what to expect at an RKC home match at Pritchard Park in Racine.
+permalink: /visit/
+---
+<section class="section">
+  <div class="wrap stack">
+    <h1>Visit Pritchard Park</h1>
+    <p class="match__venue">Everything you need before you head to the stadium.</p>
+  </div>
+</section>
+
+<section class="section section--mist" aria-labelledby="where-h">
+  <div class="wrap split">
+    <div class="stack">
+      <h2 id="where-h">Where it is</h2>
+      <address class="prose">{{ site.stadium.name }}<br>{{ site.stadium.complex }}<br>{{ site.stadium.street }}, {{ site.stadium.city }}, {{ site.stadium.region }} {{ site.stadium.zip }}</address>
+      <div class="btn-row"><a class="btn btn--primary" href="{{ site.stadium.maps }}">Get Directions</a></div>
+    </div>
+    <div class="faq">
+      {#- Brief VERIFY items held back until confirmed: parking/Roosevelt Ave access, gate time, beer service, accessibility details. -#}
+      <details open><summary>Getting there early</summary><div>Come early to watch warmups up close.</div></details>
+      <details><summary>Food and drink</summary><div>Food trucks at every home match.</div></details>
+      <details><summary>Weather</summary><div>The stadium is near the lake, and it gets cold fast once the sun goes down. Bring a layer in May and June, and sunscreen for afternoon matches.</div></details>
+      <details><summary>Kids</summary><div>Kids' activities in the fan area at most home matches, and players sign autographs after the final whistle.</div></details>
+      <details><summary>Merch</summary><div>Scarves and shirts at the merch table, or anytime at the <a href="{{ site.shop }}">shop</a>.</div></details>
+    </div>
+  </div>
+</section>
+
+<section class="section section--ink" aria-labelledby="first-h">
+  <div class="wrap stack">
+    <h2 id="first-h">First match?</h2>
+    <p class="prose">You don't need to know the offside rule to have a good night. Grab food, find a seat near the halfway line, and stay after the whistle to meet the players.</p>
+    <div class="btn-row"><a class="btn btn--secondary" href="/matches/">View Matches</a></div>
+  </div>
+</section>
