@@ -292,12 +292,41 @@ singletons:
         label: Header banner link
         widget: string
         required: false
+      - name: contact_email
+        label: Club email (shown on Contact and Privacy)
+        widget: string
+        required: false
+        pattern: ['^[^@\s]+@[^@\s]+\.[^@\s]+$', 'Enter a full email address']
+        hint: One general club address. No personal email addresses.
+      - name: zeffy_form_url
+        label: Zeffy donation form link
+        widget: string
+        required: false
+        pattern: ['^https://', 'Must be a full link starting with https://']
+        hint: The embed link for the donation form, from Zeffy. Leave blank to hide the form.
+      - name: cleanups
+        label: Lake cleanup dates
+        label_singular: Cleanup
+        widget: list
+        required: false
+        summary: "{{fields.date | date('MMM D')}} · {{fields.location}}"
+        hint: Shown on Get Involved. Remove dates once they've passed.
+        fields:
+          - { name: date, label: Date and start time, widget: datetime, input_timezone: America/Chicago }
+          - { name: location, label: Location, widget: string, default: "Eichelman Park, Kenosha" }
+          - { name: note, label: Note, widget: string, required: false, hint: 'e.g. "Gloves provided"' }
       - name: tickets
         label: Tickets
         widget: object
         fields:
           - { name: adult_price, label: "Single match: adult ($)", widget: number, value_type: float, required: false }
           - { name: youth_price, label: "Single match: kids under 12 ($)", widget: number, value_type: float, required: false }
+          - name: single_match_link
+            label: Single match tickets link (vivenu)
+            widget: string
+            required: false
+            pattern: ['^https://', 'Must be a full link starting with https://']
+            hint: Optional. If blank, Buy Tickets jumps to the list of home matches, each with its own link.
           - { name: season_ticket_price, label: Season ticket ($), widget: number, value_type: float, required: false }
           - name: season_ticket_link
             label: Season ticket link (vivenu)
