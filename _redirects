@@ -1,0 +1,11 @@
+# Old Duda URLs -> new pages (301). From the Website Brief.
+# Before cutover: add every URL from Duda's page export and 12 months of Search Console.
+/third-coast-community  /club/            301
+/mission                /club/            301
+/game_day               /visit/           301
+/schedule               /matches/         301
+/usl2                   /teams/usl2/      301
+/player-profiles        /teams/usl2/      301
+/camps-and-clinics      /get-involved/    301
+/sponsors               /partners/        301
+/blank                  /                 301

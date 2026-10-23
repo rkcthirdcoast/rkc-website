@@ -1,0 +1,57 @@
+---
+layout: layouts/base.njk
+title: Partners
+description: The local businesses and organizations behind RKC, and how to partner with the club.
+permalink: /partners/
+---
+{%- set active = partners | activeWithLogo -%}
+{%- set club = active | byCategory("club") -%}
+{%- set community = active | byCategory("community") -%}
+<section class="section">
+  <div class="wrap stack">
+    <h1>Our partners</h1>
+    <p class="match__venue">Local businesses and organizations keep this club running. Here's who's in.</p>
+  </div>
+</section>
+
+{%- if club.length %}
+<section class="section section--mist" aria-labelledby="club-partners-h">
+  <div class="wrap">
+    <div class="section__head"><h2 id="club-partners-h">Club partners</h2></div>
+    <div class="grid grid--3">
+      {%- for p in club %}
+      <div class="stack">
+        <a class="partner" href="{{ p.website or '#' }}"><img src="{{ p.logo }}" alt="{{ p.name }}" loading="lazy"></a>
+        {% if p.activation %}<p class="match__venue">{{ p.activation }}</p>{% endif %}
+      </div>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{%- endif %}
+
+{%- if community.length %}
+<section class="section" aria-labelledby="community-h">
+  <div class="wrap">
+    <div class="section__head"><h2 id="community-h">Community partners</h2></div>
+    <div class="grid grid--3">
+      {%- for p in community %}
+      <div class="stack">
+        <a class="partner" href="{{ p.website or '#' }}"><img src="{{ p.logo }}" alt="{{ p.name }}" loading="lazy"></a>
+        {% if p.activation %}<p class="match__venue">{{ p.activation }}</p>{% endif %}
+      </div>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{%- endif %}
+
+<section class="section section--ink" aria-labelledby="become-h">
+  <div class="wrap stack">
+    <p class="label label--quiet">Become a partner</p>
+    <h2 id="become-h">Put your name on summer soccer in Racine</h2>
+    <p class="prose">We build each partnership around what you're after, whether that's matchday visibility, a theme night, a lake cleanup with your staff, or a group outing for clients. Tell us what you want out of it and we'll come back with ideas.</p>
+    <p class="prose">What's available: jersey and training kit, theme nights, social content, fan area and kids' activities, community and lake cleanup events, hospitality and group outings.</p>
+    <div class="btn-row"><a class="btn btn--primary" href="/contact/?topic=partnerships">Request the Partnership Deck</a></div>
+  </div>
+</section>

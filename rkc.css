@@ -146,6 +146,7 @@ p { margin: 0; }
 .section--ink .btn--secondary:hover,
 .hero .btn--secondary:hover { background: var(--paper); color: var(--ink); }
 .btn--small { min-height: 40px; padding: 0 var(--s4); font-size: var(--fs-xs); }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
 .btn-row { display: grid; gap: var(--s3); }   /* phones: buttons full width, stacked */
 .link-arrow {
   font-weight: 600; font-size: var(--fs-sm); text-decoration: none;
@@ -299,6 +300,7 @@ body::before {   /* paints the phone's status-bar band in the header color */
   aspect-ratio: 4 / 5; width: 100%; max-width: 100%; object-fit: cover;
   background: var(--mist); border-radius: var(--radius);
 }
+div.player__photo, div.news-card__img { border: 1px solid var(--line); }   /* empty placeholder until a photo is added */
 .player__name { font-weight: 700; font-size: var(--fs-md); line-height: 1.2; }
 .player__num { color: var(--red); }
 .player__meta { font-size: var(--fs-xs); color: var(--stone); }
@@ -336,6 +338,9 @@ body::before {   /* paints the phone's status-bar band in the header color */
 .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--ink); box-shadow: 0 0 0 3px rgba(162,30,35,.25); }
 .field__error { color: var(--red); font-size: var(--fs-sm); font-weight: 600; }
 .field--invalid input, .field--invalid select, .field--invalid textarea { border-color: var(--red); }
+
+/* Embedded donation form (Zeffy, Get Involved only) */
+.donate-frame { width: 100%; min-height: 640px; border: 0; border-radius: var(--radius); background: var(--paper); }
 
 /* ---------- FAQ accordion ---------- */
 .faq { border-top: 1px solid var(--line); }

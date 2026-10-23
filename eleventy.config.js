@@ -9,7 +9,7 @@ export default function (eleventyConfig) {
   }
 
   // Copied to the site as-is
-  for (const p of ["rkc.css", "site.js", "fonts", "images", "admin", "style-sample.html"]) {
+  for (const p of ["rkc.css", "site.js", "fonts", "images", "admin", "style-sample.html", "_redirects"]) {
     eleventyConfig.addPassthroughCopy(p);
   }
 
@@ -29,6 +29,10 @@ export default function (eleventyConfig) {
     (posts || []).filter((p) => p.url !== url && p.data.team_tag === tag).slice().reverse().slice(0, n));
   // Headings never end with a period (house style). Used on intern-written headlines.
   eleventyConfig.addFilter("noEndPeriod", (t) => String(t ?? "").replace(/\s*\.+\s*$/, ""));
+  eleventyConfig.addFilter("activeOnly", (list) => (list || []).filter((x) => x.active !== false));
+  eleventyConfig.addFilter("byTag", (posts, tag) => (posts || []).filter((p) => p.data.team_tag === tag));
+  eleventyConfig.addFilter("homeOnly", (list) => (list || []).filter((m) => m.home_away === "home"));
+  eleventyConfig.addFilter("byCategory", (list, cat) => (list || []).filter((p) => (p.category || "club") === cat));
   eleventyConfig.addFilter("head", (list, n) => (list || []).slice(0, n));
   eleventyConfig.addFilter("activeWithLogo", (list) => (list || []).filter((p) => p.active !== false && p.logo));
   eleventyConfig.addFilter("alumniList", (list) => (list || []).filter((p) => p.alumni));

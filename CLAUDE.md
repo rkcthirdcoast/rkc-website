@@ -63,6 +63,10 @@ _includes/         layouts/ (base, news-post) and partials/ (header, footer, mat
 _data/             loaders that read content/ (matches, players, partners, staff, settings) plus site.js constants
 lib/               shared helpers: YAML reader, team labels, Central-time date formats
 components.njk     /components/: shared components with placeholder data, for approval; noindex
+index.njk ...      one .njk per page: index, matches, club, tickets, visit, partners, get-involved, contact, play, privacy, 404
+teams/             team.njk builds /teams/usl2/, /teams/uslw/, /teams/mwpl/ from _data/teams.js; index.njk is /teams/
+news/index.njk     /news/ list; posts themselves live in content/news/
+_redirects         old Duda URLs -> new pages (301). Add every URL from the Duda export before cutover
 admin/             site editor (Sveltia CMS): index.html + config.yml. Content types and fields live in config.yml
 content/           what interns edit: matches/, news/, players/, partners/, staff/, settings.yml. Never hand-edit facts into pages
 images/brand/      approved club logos as SVG (rkc-crest.svg = full-color crest, from RKC Badge 1.ai). Never edit; replace from the source file
@@ -78,5 +82,7 @@ _site/             build output; never committed
 - News post text is never run through Nunjucks, so `{{` in a post is safe.
 - Pages are built when something merges, not live. "Next match" is decided at build time.
 - `site.prelaunch` in `_data/site.js` adds `noindex` to every page. Set it to `false` at cutover.
+- Every form uses `partials/form.njk` and posts to `site.forms.endpoint`. While that is empty, forms show "not switched on yet" and can't submit.
+- Facts the brief marks VERIFY stay out of the pages (a `{#- Brief VERIFY ... -#}` comment marks each spot) until Tim confirms them.
 
 Pages and `_redirects` are added as the build proceeds; update this section when they are.
