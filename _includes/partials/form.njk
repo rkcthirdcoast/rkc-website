@@ -1,0 +1,18 @@
+{#-
+  Shared form wrapper. Every site form posts to site.forms.endpoint with a hidden "form" name.
+  Until an endpoint is set, the form shows a notice and its button is disabled.
+  Usage: {% call siteForm("contact", "Send Message") %} ...fields... {% endcall %}
+-#}
+{% macro siteForm(name, submitLabel, id) %}
+{%- set live = site.forms.endpoint -%}
+<form class="form" id="{{ id or (name + '-form') }}" method="post" action="{{ site.forms.endpoint or '#' }}" data-form="{{ name }}"{% if not live %} data-offline{% endif %}>
+  <input type="hidden" name="form" value="{{ name }}">
+  {#- Spam trap: people never see or fill this field. -#}
+  <div hidden><label>Leave this empty <input name="website" tabindex="-1" autocomplete="off"></label></div>
+  {{ caller() }}
+  {%- if not live %}
+  <p class="field__error" role="note">This form isn't switched on yet.{% if settings.contact_email %} Email <a href="mailto:{{ settings.contact_email }}">{{ settings.contact_email }}</a> instead.{% endif %}</p>
+  {%- endif %}
+  <div class="btn-row"><button class="btn btn--primary" type="submit"{% if not live %} disabled{% endif %}>{{ submitLabel }}</button></div>
+</form>
+{% endmacro %}
