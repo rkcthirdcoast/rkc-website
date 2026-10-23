@@ -1,0 +1,80 @@
+---
+layout: layouts/base.njk
+title: Club
+description: RKC Third Coast FC fields three senior teams at Pritchard Park Stadium in Racine, and looks after the lake it plays next to.
+permalink: /club/
+---
+{%- set alumni = players | alumniList -%}
+{%- set cleanup = partners | cleanupPartner -%}
+<section class="hero">
+  <div class="hero__shade"></div>
+  <div class="wrap">
+    <p class="label label--quiet">The club</p>
+    <h1>Rooted in Racine and Kenosha.</h1>
+    <p class="hero__sub">RKC Third Coast FC fields three senior teams: men in USL League Two, women in the USL W League, and a second men's side in the Midwest Premier League. Home is Pritchard Park Stadium in Racine.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap prose">
+    <h2>Why "Third Coast"</h2>
+    <p>The western shore of Lake Michigan gets called the Third Coast. For us it's a name and a job. Compete for this region, invest in the people who live here, and look after the lake we play next to.</p>
+  </div>
+</section>
+
+<section class="section section--mist" aria-labelledby="pathway-h">
+  <div class="wrap">
+    <div class="section__head">
+      <div class="prose">
+        <h2 id="pathway-h">The pathway</h2>
+        <p>Each summer, college players from Wisconsin and across the country come here for serious training and real matches. Some of them go pro.</p>
+      </div>
+    </div>
+    {%- if alumni.length %}
+    <div class="roster">
+      {%- for p in alumni %}
+      <div class="player">
+        {% if p.headshot %}<img class="player__photo" src="{{ p.headshot }}" alt="{{ p.name }}" loading="lazy">{% else %}<div class="player__photo"></div>{% endif %}
+        <p class="player__name">{{ p.name }}</p>
+        <p class="player__meta">{% if p.seasons and p.seasons.length %}RKC {{ p.seasons | join(", ") }}{% endif %}{% if p.current_club %}<br>Now: {{ p.current_club }}{% endif %}</p>
+      </div>
+      {%- endfor %}
+    </div>
+    {%- endif %}
+  </div>
+</section>
+
+<section class="section section--ink" aria-labelledby="lake-h">
+  <div class="wrap stack">
+    <h2 id="lake-h">The lake</h2>
+    <p class="prose">The lake shapes how people here live, work and spend their summers. If we carry the Third Coast name, we help take care of it. That's why we run monthly cleanups, and why Lake Michigan Night is on the calendar every June.</p>
+    {%- if cleanup and cleanup.website %}
+    <div class="btn-row"><a class="btn btn--secondary" href="{{ cleanup.website }}">Join a Cleanup</a></div>
+    {%- endif %}
+  </div>
+</section>
+
+<section class="section" aria-labelledby="next-h">
+  <div class="wrap stack">
+    <h2 id="next-h">The next chapter</h2>
+    <p class="prose">RKC is becoming a nonprofit in fall 2026. Money the club raises goes back into the teams, community programs and lake work.</p>
+    <div class="btn-row"><a class="btn btn--primary" href="/get-involved/">Get Involved</a></div>
+  </div>
+</section>
+
+{%- if staff.length %}
+<section class="section section--mist" aria-labelledby="people-h">
+  <div class="wrap">
+    <div class="section__head"><h2 id="people-h">People</h2></div>
+    <div class="roster">
+      {%- for s in staff %}
+      <div class="player">
+        {% if s.photo %}<img class="player__photo" src="{{ s.photo }}" alt="{{ s.name }}" loading="lazy">{% else %}<div class="player__photo"></div>{% endif %}
+        <p class="player__name">{{ s.name }}</p>
+        <p class="player__meta">{{ s.role }}{% if s.team != "front_office" %}<br>{{ s.team | teamLabel }}{% endif %}</p>
+      </div>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{%- endif %}

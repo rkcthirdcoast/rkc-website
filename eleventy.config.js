@@ -27,6 +27,14 @@ export default function (eleventyConfig) {
   // Up to n other posts with the same team tag, newest first
   eleventyConfig.addFilter("relatedPosts", (posts, url, tag, n = 3) =>
     (posts || []).filter((p) => p.url !== url && p.data.team_tag === tag).slice().reverse().slice(0, n));
+  eleventyConfig.addFilter("head", (list, n) => (list || []).slice(0, n));
+  eleventyConfig.addFilter("activeWithLogo", (list) => (list || []).filter((p) => p.active !== false && p.logo));
+  eleventyConfig.addFilter("alumniList", (list) => (list || []).filter((p) => p.alumni));
+  // Root-Pike WIN (or the first community partner with a website) runs the cleanups
+  eleventyConfig.addFilter("cleanupPartner", (list) => {
+    const community = (list || []).filter((p) => p.category === "community" && p.active !== false && p.website);
+    return community.find((p) => /root.?pike/i.test(p.name)) || community[0];
+  });
   // "Sample City SC" -> "SCS": stand-in badge when an opponent has no logo
   eleventyConfig.addFilter("initials", (name) =>
     String(name || "").split(/\s+/).filter(Boolean).slice(0, 3).map((w) => w[0]).join("").toUpperCase());

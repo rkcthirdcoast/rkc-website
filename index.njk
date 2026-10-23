@@ -1,0 +1,97 @@
+---
+layout: layouts/base.njk
+description: RKC Third Coast FC plays USL League Two, USL W League and Midwest Premier League soccer at Pritchard Park Stadium in Racine, Wisconsin.
+permalink: /
+---
+{%- from "partials/match.njk" import matchCard -%}
+{%- set inSeason = settings.season_mode == "in_season" -%}
+{%- set nextMatch = (matches | upcoming)[0] -%}
+{%- set lastResult = (matches | results)[0] -%}
+{%- set latestNews = (collections.news or []) | reverse -%}
+<section class="hero">
+  <div class="hero__shade"></div>
+  <div class="wrap">
+    <p class="label label--quiet">Racine · Kenosha · Lake Michigan</p>
+    <h1>Soccer on the Third Coast.</h1>
+    <p class="hero__sub">Three teams, one home ground in Racine. Summer nights at Pritchard Park, with college players chasing the next level.</p>
+    {% include "partials/hero-buttons.njk" %}
+  </div>
+</section>
+
+<section class="section" aria-label="Next match and latest result">
+  <div class="wrap grid grid--2">
+    {%- if inSeason and nextMatch %}
+    {{ matchCard(nextMatch, next=true) }}
+    {%- else %}
+    {% include "partials/season-card.njk" %}
+    {%- endif %}
+    {#- Latest result is hidden in the offseason so an old score never sits on the homepage. -#}
+    {%- if inSeason and lastResult %}
+    {{ matchCard(lastResult) }}
+    {%- endif %}
+  </div>
+</section>
+
+<section class="section section--mist" aria-labelledby="teams-h">
+  <div class="wrap">
+    <div class="section__head"><h2 id="teams-h">Three teams. One club.</h2></div>
+    <div class="grid grid--3">
+      {%- for t in ["usl2", "uslw", "mwpl"] %}
+      <a class="team-card" href="/teams/{{ t }}/"><span class="label label--quiet">{{ t | teamLabel }}</span><span class="team-card__name">{{ t | rkcName }}</span><span class="label">Meet the Squad</span></a>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section--ink" aria-labelledby="why-h">
+  <div class="wrap">
+    <div class="section__head"><h2 id="why-h">Why RKC</h2></div>
+    <div class="grid grid--3">
+      {#- The alumni pro-contract count stays off until Tim verifies it (brief: VERIFY). -#}
+      <div class="pillar"><h3>The pathway</h3><p>College players spend their summer here competing for a shot at the next level.</p></div>
+      <div class="pillar"><h3>The community</h3><p>Clubs at this level don't run on big budgets. They run on volunteers, interns, local businesses and fans who keep showing up.</p></div>
+      <div class="pillar"><h3>The lake</h3><p>Lake Michigan defines this region, so looking after it is part of the job. We run monthly cleanups at Eichelman Park in Kenosha, and Lake Fact Friday keeps the lake in front of fans year-round.</p></div>
+    </div>
+    <div class="btn-row section__foot"><a class="btn btn--secondary" href="/club/">About the Club</a></div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="matchday-h">
+  <div class="wrap stack">
+    <h2 id="matchday-h">A summer night out that won't empty your wallet.</h2>
+    <p class="prose">{% if settings.tickets.adult_price %}Tickets from ${{ settings.tickets.adult_price }}.{% if settings.tickets.youth_price %} Kids under 12 for ${{ settings.tickets.youth_price }}.{% endif %} {% endif %}Food trucks, music, a fan area for kids, and players signing autographs after the final whistle.</p>
+    <div class="btn-row"><a class="btn btn--secondary" href="/visit/">Plan Your Visit</a></div>
+  </div>
+</section>
+
+{%- if latestNews.length %}
+<section class="section section--mist" aria-labelledby="news-h">
+  <div class="wrap">
+    <div class="section__head"><h2 id="news-h">Latest news</h2><a class="link-arrow" href="/news/">All News</a></div>
+    <div class="grid grid--3">
+      {%- for post in latestNews | head(3) %}
+      <a class="news-card" href="{{ post.url }}">
+        {% if post.data.hero_photo %}<img class="news-card__img" src="{{ post.data.hero_photo }}" alt="{{ post.data.hero_photo_alt }}" loading="lazy">{% else %}<div class="news-card__img"></div>{% endif %}
+        <span class="label label--red">{{ post.data.team_tag | teamShort }}</span>
+        <span class="news-card__title">{{ post.data.title }}</span>
+        <span class="news-card__summary">{{ post.data.summary }}</span>
+      </a>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{%- endif %}
+
+{%- set strip = partners | activeWithLogo -%}
+{%- if strip.length %}
+<section class="section" aria-labelledby="partners-h">
+  <div class="wrap">
+    <div class="section__head"><h2 id="partners-h">Our partners</h2><a class="btn btn--secondary btn--small" href="/partners/">Become a Partner</a></div>
+    <div class="partners">
+      {%- for p in strip %}
+      <a class="partner" href="{{ p.website or '/partners/' }}"><img src="{{ p.logo }}" alt="{{ p.name }}" loading="lazy"></a>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{%- endif %}

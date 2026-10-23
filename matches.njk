@@ -1,0 +1,46 @@
+---
+layout: layouts/base.njk
+title: Matches
+description: Fixtures and results for RKC Third Coast FC's USL League Two, USL W League and Midwest Premier League teams.
+permalink: /matches/
+---
+{%- from "partials/match.njk" import fixtureRow -%}
+{%- set coming = matches | upcoming -%}
+{%- set played = matches | results -%}
+<section class="section">
+  <div class="wrap">
+    <div class="section__head">
+      <div class="stack">
+        <h1>Matches</h1>
+        <p class="match__venue">Every fixture and result for all three teams, in one place.</p>
+      </div>
+    </div>
+    {%- if coming.length or played.length %}
+    <div class="filters" role="group" aria-label="Filter matches" aria-controls="fixtures">
+      <button class="chip" type="button" data-filter="all" aria-pressed="true">All</button>
+      <button class="chip" type="button" data-filter="men" aria-pressed="false">Men</button>
+      <button class="chip" type="button" data-filter="women" aria-pressed="false">Women</button>
+      <button class="chip" type="button" data-filter="mwpl" aria-pressed="false">MWPL</button>
+      <button class="chip" type="button" data-filter="home" aria-pressed="false">Home</button>
+      <button class="chip" type="button" data-filter="away" aria-pressed="false">Away</button>
+    </div>
+    {%- endif %}
+    <div class="fixture-list" id="fixtures">
+      {%- if not coming.length %}
+      <p class="match__venue">We post the schedule here as soon as the leagues release it. Follow <a href="{{ site.instagram }}">@rkcthirdcoast</a> to hear first.</p>
+      {%- endif %}
+      {#- Upcoming first, soonest first. Then results, newest first. -#}
+      {%- for m in coming %}{{ fixtureRow(m) }}{% endfor %}
+      {%- for m in played %}{{ fixtureRow(m) }}{% endfor %}
+    </div>
+  </div>
+</section>
+<section class="section section--mist" aria-label="Home matches">
+  <div class="wrap stack">
+    <p>Home matches are at Pritchard Park in Racine.</p>
+    <div class="btn-row">
+      {% if settings.season_mode == "in_season" %}<a class="btn btn--primary" href="/tickets/">Get Tickets</a>{% endif %}
+      <a class="btn btn--secondary" href="/visit/">Plan Your Visit</a>
+    </div>
+  </div>
+</section>
