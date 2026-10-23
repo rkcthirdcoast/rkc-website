@@ -174,7 +174,7 @@ body::before {   /* paints the phone's status-bar band in the header color */
   gap: var(--s4); min-height: var(--header-h);
 }
 .brand { display: flex; align-items: center; gap: var(--s3); color: var(--paper); text-decoration: none; }
-.brand__crest { width: 40px; height: 40px; flex: none; }
+.brand__crest { height: 44px; width: auto; flex: none; }   /* full-color crest image, keeps its proportions */
 .brand__name { height: 18px; width: auto; }   /* Bell MT lockup SVG */
 .nav { display: none; }
 .header-actions { display: flex; align-items: center; gap: var(--s2); }
@@ -208,6 +208,7 @@ body::before {   /* paints the phone's status-bar band in the header color */
   padding-block: var(--s8) var(--s7);
 }
 .hero__sub { font-size: var(--fs-md); max-width: 32rem; color: #e8e4e4; }
+.hero__crest { width: 96px; height: auto; }   /* Home: the club crest in the hero */
 
 /* ---------- Match card ---------- */
 .match {
@@ -400,7 +401,10 @@ body::before {   /* paints the phone's status-bar band in the header color */
   .nav a:hover { border-bottom-color: var(--paper); color: var(--paper); }
   .nav a[aria-current="page"] { border-bottom-color: var(--red); }
   .menu-btn, .mobile-menu { display: none; }
-  .brand__crest { width: 48px; height: 48px; }
+  .brand__crest { height: 52px; }
+  .hero--crest .wrap { grid-template-columns: 1fr auto; column-gap: var(--s7); }
+  .hero--crest .wrap > * { grid-column: 1; }
+  .hero--crest .hero__crest { grid-column: 2; grid-row: 1 / span 4; align-self: center; width: 200px; }
   .roster { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .partners { grid-template-columns: repeat(6, minmax(0, 1fr)); }
   .split { display: grid; grid-template-columns: 5fr 7fr; gap: var(--s7); align-items: start; }

@@ -8,9 +8,10 @@ permalink: /
 {%- set nextMatch = (matches | upcoming)[0] -%}
 {%- set lastResult = (matches | results)[0] -%}
 {%- set latestNews = (collections.news or []) | reverse -%}
-<section class="hero">
+<section class="hero hero--crest">
   <div class="hero__shade"></div>
   <div class="wrap">
+    <img class="hero__crest" src="/images/brand/rkc-crest.svg" alt="" width="200" height="300">
     <p class="label label--quiet">Racine · Kenosha · Lake Michigan</p>
     <h1>Soccer on the Third Coast</h1>
     <p class="hero__sub">Three teams, one home ground in Racine. Summer nights at Pritchard Park, with college players chasing the next level.</p>
