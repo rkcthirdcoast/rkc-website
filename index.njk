@@ -35,7 +35,7 @@ permalink: /
 
 <section class="section section--mist" aria-labelledby="teams-h">
   <div class="wrap">
-    <div class="section__head"><h2 id="teams-h">Three teams. One club.</h2></div>
+    <div class="section__head"><h2 id="teams-h">Three teams. One club</h2></div>
     <div class="grid grid--3">
       {%- for t in ["usl2", "uslw", "mwpl"] %}
       <a class="team-card" href="/teams/{{ t }}/"><span class="label label--quiet">{{ t | teamLabel }}</span><span class="team-card__name">{{ t | rkcName }}</span><span class="label">Meet the Squad</span></a>
@@ -59,7 +59,7 @@ permalink: /
 
 <section class="section" aria-labelledby="matchday-h">
   <div class="wrap stack">
-    <h2 id="matchday-h">A summer night out that won't empty your wallet.</h2>
+    <h2 id="matchday-h">A summer night out that won't empty your wallet</h2>
     <p class="prose">{% if settings.tickets.adult_price %}Tickets from ${{ settings.tickets.adult_price }}.{% if settings.tickets.youth_price %} Kids under 12 for ${{ settings.tickets.youth_price }}.{% endif %} {% endif %}Food trucks, music, a fan area for kids, and players signing autographs after the final whistle.</p>
     <div class="btn-row"><a class="btn btn--secondary" href="/visit/">Plan Your Visit</a></div>
   </div>

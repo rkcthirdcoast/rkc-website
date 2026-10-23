@@ -34,6 +34,7 @@ Where the two disagree, the scope doc wins. Where this file and the brief disagr
 - No carousels for anything a visitor needs. No autoplay video on phones.
 - Buttons say what happens: Get Tickets, View Matches, Become a Partner. Never "Learn more" or "Click here".
 - No text inside images. If a graphic shows a score, the score is also on the page as text.
+- Headings (H1–H6) never end with a period. A period inside a heading is fine ("Three teams. One club").
 - One H1 per page. Alt text on every meaningful image.
 
 ## Content rules
