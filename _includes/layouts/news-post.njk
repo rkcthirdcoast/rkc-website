@@ -1,0 +1,41 @@
+---
+layout: layouts/base.njk
+---
+{#- One news post: /news/<slug>/. Fields come from the News content type. -#}
+<article>
+  <section class="hero">
+    {% if hero_photo %}<img class="hero__media" src="{{ hero_photo }}" alt="{{ hero_photo_alt }}">{% endif %}
+    <div class="hero__shade"></div>
+    <div class="wrap">
+      <p class="label label--quiet">{{ team_tag | teamLabel }} · <time datetime="{{ page.date | chicago('iso') }}">{{ page.date | chicago('long') }}</time></p>
+      <h1>{{ title }}</h1>
+      {% if summary %}<p class="hero__sub">{{ summary }}</p>{% endif %}
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap">
+      <div class="prose">
+        {% if author %}<p class="label label--quiet">By {{ author }}</p>{% endif %}
+        {{ content | safe }}
+      </div>
+    </div>
+  </section>
+</article>
+{%- set related = collections.news | relatedPosts(page.url, team_tag) -%}
+{% if related.length %}
+<section class="section section--mist" aria-labelledby="more-h">
+  <div class="wrap">
+    <div class="section__head"><h2 id="more-h">More from {{ team_tag | teamShort }}</h2><a class="link-arrow" href="/news/">All News</a></div>
+    <div class="grid grid--3">
+      {%- for post in related %}
+      <a class="news-card" href="{{ post.url }}">
+        {% if post.data.hero_photo %}<img class="news-card__img" src="{{ post.data.hero_photo }}" alt="{{ post.data.hero_photo_alt }}" loading="lazy">{% else %}<div class="news-card__img"></div>{% endif %}
+        <span class="label label--red">{{ post.data.team_tag | teamShort }}</span>
+        <span class="news-card__title">{{ post.data.title }}</span>
+        <span class="news-card__summary">{{ post.data.summary }}</span>
+      </a>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
