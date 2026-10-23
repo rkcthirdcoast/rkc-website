@@ -1,0 +1,28 @@
+{%- set inSeason = settings.season_mode == "in_season" -%}
+{%- set showBottomBar = showBottomBar if showBottomBar is defined else inSeason -%}
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{% if title %}{{ title }} · {% endif %}{{ site.name }}</title>
+{% if description %}<meta name="description" content="{{ description }}">{% endif %}
+{% if site.prelaunch or noindex %}<meta name="robots" content="noindex">{% endif %}
+<link rel="stylesheet" href="/rkc.css">
+<script src="/site.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+{% include "partials/header.njk" %}
+<main id="main"{% if showBottomBar %} class="has-bottom-bar"{% endif %}>
+{{ content | safe }}
+</main>
+{% include "partials/footer.njk" %}
+{% if showBottomBar %}
+<nav class="bottom-bar" aria-label="Matchday">
+  <a class="btn btn--secondary" href="/matches/">Matches</a>
+  <a class="btn btn--primary" href="/tickets/">Tickets</a>
+</nav>
+{% endif %}
+</body>
+</html>

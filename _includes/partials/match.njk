@@ -1,0 +1,59 @@
+{#-
+  Match card and fixture row. Both read one entry from the Match content type.
+  Usage: {% from "partials/match.njk" import matchCard, fixtureRow %}
+         {{ matchCard(m, next=true) }}   {{ fixtureRow(m) }}
+-#}
+
+{% macro badge(name, logo) -%}
+{%- if logo %}<img class="match__badge" src="{{ logo }}" alt="{{ name }} logo" width="36" height="36">
+{%- else %}<span class="match__badge" aria-hidden="true">{{ name | initials }}</span>{% endif -%}
+{%- endmacro %}
+
+{% macro matchCard(m, next=false) %}
+{%- set final = m.status == "final" -%}
+{%- set won = final and m.rkc_score > m.opponent_score -%}
+{%- set lost = final and m.rkc_score < m.opponent_score -%}
+<article class="match{% if next %} match--next{% endif %}">
+  <div class="match__meta">
+    {%- if m.status == "postponed" %}<span class="status status--postponed">Postponed</span>
+    {%- elif final %}<span class="status status--final">Final</span>
+    {%- elif next %}<span class="status status--next">Next up</span>
+    {%- else %}<span class="status status--next">{{ "Home" if m.home_away == "home" else "Away" }}</span>{% endif %}
+    <span class="label label--quiet">{{ m.team | teamLabel }}</span>
+  </div>
+  <p class="match__when num"><time datetime="{{ m.date | chicago('iso') }}">{{ m.date | chicago('day' if final else 'kickoff') }}</time></p>
+  <div class="match__teams">
+    <div class="match__team{% if lost %} match__team--loss{% endif %}"><span class="match__badge" aria-hidden="true">RKC</span>{{ m.team | rkcName }}{% if final %}<span class="num">{{ m.rkc_score }}</span>{% endif %}</div>
+    <div class="match__team{% if won %} match__team--loss{% endif %}">{{ badge(m.opponent, m.opponent_logo) }}{{ m.opponent }}{% if final %}<span class="num">{{ m.opponent_score }}</span>{% endif %}</div>
+  </div>
+  {%- if final and m.scorers and m.scorers.length %}
+  <p class="match__scorers">{{ m.scorers | join(", ") }}</p>
+  {%- endif %}
+  {%- if not final %}
+  <p class="match__venue">{{ m.venue }}</p>
+  {%- endif %}
+  {%- if not final and m.status != "postponed" and m.home_away == "home" %}
+  <div class="btn-row">
+    {% if m.ticket_link %}<a class="btn btn--primary" href="{{ m.ticket_link }}">Get Tickets</a>{% endif %}
+    <a class="btn btn--secondary" href="/visit/">Plan Your Visit</a>
+  </div>
+  {%- endif %}
+  {%- if final and m.match_report %}
+  <a class="link-arrow" href="/news/{{ m.match_report }}/">Match Report</a>
+  {%- endif %}
+</article>
+{% endmacro %}
+
+{% macro fixtureRow(m) %}
+{%- set final = m.status == "final" -%}
+<div class="fixture" data-team="{{ m.team | teamCode }}" data-venue="{{ m.home_away }}">
+  <p class="fixture__date label label--quiet num">{{ m.date | chicago('day' if final else 'kickoff') }} · {{ m.team | teamShort }}{% if final %} · Final{% endif %}</p>
+  <p class="fixture__opp">{{ "vs" if m.home_away == "home" else "at" }} {{ m.opponent }}</p>
+  <div class="fixture__end">
+    {%- if m.status == "postponed" %}<span class="status status--postponed">Postponed</span>
+    {%- elif final %}<span class="fixture__score">{{ m.rkc_score }}–{{ m.opponent_score }} {{ "W" if m.rkc_score > m.opponent_score else ("L" if m.rkc_score < m.opponent_score else "D") }}</span>
+    {%- elif m.home_away == "home" and m.ticket_link %}<a class="btn btn--primary btn--small" href="{{ m.ticket_link }}">Tickets</a>
+    {%- else %}<span class="status status--next">{{ "Home" if m.home_away == "home" else "Away" }}</span>{% endif -%}
+  </div>
+</div>
+{% endmacro %}

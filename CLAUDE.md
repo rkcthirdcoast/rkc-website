@@ -50,15 +50,31 @@ Where the two disagree, the scope doc wins. Where this file and the brief disagr
 
 ```
 rkc.css            the only stylesheet
+site.js            the only script: mobile menu and filter chips. Pages must work without it
 fonts/             self-hosted Poppins 400/600/700 (OFL license included)
 style-sample.html  approved component sample (rkc.css v0.1); reference only
 CLAUDE.md          this file
 AGENTS.md          points other AI tools here
-wrangler.jsonc     Cloudflare settings (serves the repo as the site)
-.assetsignore      repo files kept off the public site
+wrangler.jsonc     Cloudflare settings: runs the build, publishes _site/ only
+package.json       Eleventy build (npm run build). Pin exact versions, none under two weeks old
+eleventy.config.js what gets built, copied or ignored; template filters
+_includes/         layouts/ (base, news-post) and partials/ (header, footer, match card + fixture row)
+_data/             loaders that read content/ (matches, players, partners, staff, settings) plus site.js constants
+lib/               shared helpers: YAML reader, team labels, Central-time date formats
+components.njk     /components/: shared components with placeholder data, for approval; noindex
 admin/             site editor (Sveltia CMS): index.html + config.yml. Content types and fields live in config.yml
 content/           what interns edit: matches/, news/, players/, partners/, staff/, settings.yml. Never hand-edit facts into pages
 images/uploads/    images uploaded through the editor (converted to WebP, 5 MB limit)
+_site/             build output; never committed
 ```
 
-Pages, the Eleventy build and `_redirects` are added as the build proceeds; update this section when they are.
+## How the build works
+
+- Cloudflare runs `npm run build` (Eleventy) before every deploy and preview, then publishes `_site/`.
+- Pages read content through `_data/` (e.g. `matches`, `settings`). News posts in `content/news/` become `/news/<file-name>/`.
+- Dates are stored with their Central-time offset; always format them with the `chicago` filter, never the server clock.
+- News post text is never run through Nunjucks, so `{{` in a post is safe.
+- Pages are built when something merges, not live. "Next match" is decided at build time.
+- `site.prelaunch` in `_data/site.js` adds `noindex` to every page. Set it to `false` at cutover.
+
+Pages and `_redirects` are added as the build proceeds; update this section when they are.
