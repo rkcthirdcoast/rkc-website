@@ -4,6 +4,8 @@ export default {
   url: "https://rkcthirdcoast.com",
   shop: "https://shop.rkcthirdcoast.com",
   instagram: "https://www.instagram.com/rkcthirdcoast/",
+  // RKC organizes its own lake cleanups; sign-up lives on Get Involved
+  cleanup: "/get-involved/#cleanups",
   // Until launch, ask search engines not to index the preview addresses.
   prelaunch: true,
   nav: [
