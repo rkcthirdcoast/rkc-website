@@ -1,0 +1,46 @@
+{#- Banner text, Tickets button and season posture all come from Club settings. -#}
+{%- set showTickets = settings.season_mode == "in_season" or settings.tickets.season_tickets_on_sale -%}
+{% if settings.banner_text %}
+<div class="banner">
+  <div class="wrap">{% if settings.banner_link %}<a href="{{ settings.banner_link }}">{{ settings.banner_text }}</a>{% else %}{{ settings.banner_text }}{% endif %}</div>
+</div>
+{% endif %}
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="RKC Third Coast FC home">
+      {#- Stand-in crest and Bell MT lockup until the real SVG files are exported. -#}
+      <svg class="brand__crest" viewBox="0 0 48 48" aria-hidden="true">
+        <circle cx="24" cy="24" r="22.5" fill="none" stroke="#ffffff" stroke-width="2"/>
+        <path d="M8 29 Q16 25 24 29 T40 29" fill="none" stroke="#ffffff" stroke-width="1.6"/>
+        <path d="M10 33 Q17 29.5 24 33 T38 33" fill="none" stroke="#ffffff" stroke-width="1.6"/>
+        <text x="24" y="22" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-weight="700" font-size="11" fill="#ffffff">RKC</text>
+      </svg>
+      <svg class="brand__name" viewBox="0 0 220 22" aria-hidden="true">
+        <text x="0" y="17" font-family="'Bell MT', Georgia, 'Times New Roman', serif" font-weight="700" font-size="18" letter-spacing="1.2" fill="#ffffff">RKC THIRD COAST FC</text>
+      </svg>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <ul>
+        {%- for item in site.nav %}
+        <li><a href="{{ item.url }}"{% if page.url and item.url.startsWith("/") and page.url.startsWith(item.url) %} aria-current="page"{% endif %}>{{ item.label }}</a></li>
+        {%- endfor %}
+      </ul>
+    </nav>
+    <div class="header-actions">
+      {% if showTickets %}<a class="btn btn--primary btn--small" href="/tickets/">Tickets</a>{% endif %}
+      <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobile-menu" hidden>
+    <div class="wrap">
+      <ul>
+        {% if showTickets %}<li><a href="/tickets/">Tickets</a></li>{% endif %}
+        {%- for item in site.nav %}
+        <li><a href="{{ item.url }}"{% if page.url and item.url.startsWith("/") and page.url.startsWith(item.url) %} aria-current="page"{% endif %}>{{ item.label }}</a></li>
+        {%- endfor %}
+      </ul>
+    </div>
+  </div>
+</header>
