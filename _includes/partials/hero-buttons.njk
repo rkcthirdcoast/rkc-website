@@ -1,0 +1,11 @@
+{#- Hero buttons follow Club settings, per the brief's season switch:
+    in season: Get Tickets + View Matches
+    offseason: View Matches, plus Get Season Tickets only while they're on sale -#}
+<div class="btn-row">
+  {%- if settings.season_mode == "in_season" %}
+  <a class="btn btn--primary" href="/tickets/">Get Tickets</a>
+  {%- elif settings.tickets.season_tickets_on_sale %}
+  <a class="btn btn--primary" href="{{ settings.tickets.season_ticket_link or '/tickets/' }}">Get Season Tickets</a>
+  {%- endif %}
+  <a class="btn btn--secondary" href="/matches/">View Matches</a>
+</div>
