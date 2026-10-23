@@ -1,0 +1,312 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+#
+# RKC site editor (Sveltia CMS). Field list follows the Rebuild Scope and Website Brief docs.
+# Interns edit content here only. Layout, pages and rkc.css change through Claude PRs.
+
+backend:
+  name: github
+  repo: rkcthirdcoast/rkc-website
+  branch: main
+  # Cloudflare Worker that handles GitHub login (sveltia-cms-auth).
+  base_url: https://sveltia-cms-auth.tim-d45.workers.dev
+
+# Every save is a draft pull request. Nothing reaches main until Tim (or Wayne) approves it.
+publish_mode: editorial_workflow
+
+media_folder: /images/uploads
+public_folder: /images/uploads
+
+media_libraries:
+  default:
+    config:
+      max_file_size: 5000000 # 5 MB: stops raw camera files bloating the repo
+      transformations:
+        raster_image:
+          format: webp
+          quality: 85
+          width: 2000
+          height: 2000
+
+collections:
+  # ---------------------------------------------------------------- Matches
+  - name: matches
+    label: Matches
+    label_singular: Match
+    description: One entry per fixture. Add the fixture list once per season; update each match after full time.
+    folder: /content/matches
+    extension: yml
+    format: yaml
+    create: true
+    slug: "{{date | date('YYYY-MM-DD')}}-{{team}}-{{opponent}}"
+    summary: "{{date | date('MMM D')}} · {{team}} · {{home_away}} vs {{opponent}} · {{status}}"
+    sortable_fields: [date, team, status]
+    view_filters:
+      - { label: Men (USL2), field: team, pattern: usl2 }
+      - { label: Women (USL W), field: team, pattern: uslw }
+      - { label: MWPL, field: team, pattern: mwpl }
+      - { label: Upcoming, field: status, pattern: upcoming }
+      - { label: Final, field: status, pattern: final }
+    fields:
+      - name: team
+        label: Team
+        widget: select
+        options:
+          - { label: "USL League Two (men)", value: usl2 }
+          - { label: "USL W League (women)", value: uslw }
+          - { label: "Midwest Premier League", value: mwpl }
+      - name: date
+        label: Date and kickoff time
+        widget: datetime
+        input_timezone: America/Chicago
+        hint: Central time. If kickoff isn't set yet, use 7:00 PM and update it later.
+      - { name: opponent, label: Opponent, widget: string }
+      - name: opponent_logo
+        label: Opponent logo
+        widget: image
+        required: false
+        hint: Optional. Alt text is added automatically from the opponent's name.
+      - name: home_away
+        label: Home or away
+        widget: select
+        options: [{ label: Home, value: home }, { label: Away, value: away }]
+        default: home
+      - { name: venue, label: Venue, widget: string, default: "Pritchard Park Stadium, Racine" }
+      - name: ticket_link
+        label: Ticket link (vivenu)
+        widget: string
+        required: false
+        pattern: ['^https://', 'Must be a full link starting with https://']
+        hint: Home matches only. Shown only while the status is Upcoming.
+      - name: status
+        label: Status
+        widget: select
+        options:
+          - { label: Upcoming, value: upcoming }
+          - { label: Final, value: final }
+          - { label: Postponed, value: postponed }
+        default: upcoming
+      - { name: rkc_score, label: RKC score, widget: number, value_type: int, min: 0, required: false, hint: Fill in when the match is final. }
+      - { name: opponent_score, label: Opponent score, widget: number, value_type: int, min: 0, required: false }
+      - name: scorers
+        label: RKC scorers
+        widget: list
+        required: false
+        hint: One name per item, in scoring order. Add a name twice for a brace.
+      - name: match_report
+        label: Match report
+        widget: relation
+        collection: news
+        value_field: "{{slug}}"
+        search_fields: [title]
+        display_fields: [title]
+        required: false
+        hint: Pick the news post once it's published.
+      - { name: hero_photo, label: Match photo, widget: image, required: false }
+      - name: hero_photo_alt
+        label: Match photo description (alt text)
+        widget: string
+        required: false
+        hint: Required if you add a photo. Describe what's in it, e.g. "Number 9 heads in the opener against Chicago".
+
+  # ---------------------------------------------------------------- News
+  - name: news
+    label: News
+    label_singular: News post
+    description: Match reports, signings, community work and club updates. Each post gets its own page at /news/post-title.
+    folder: /content/news
+    extension: md
+    format: frontmatter
+    create: true
+    slug: "{{slug}}"
+    summary: "{{date | date('MMM D, YYYY')}} · {{team_tag}} · {{title}}"
+    sortable_fields: [date, title, team_tag]
+    fields:
+      - { name: title, label: Headline, widget: string }
+      - { name: date, label: Date, widget: datetime, type: date }
+      - name: team_tag
+        label: Team tag
+        widget: select
+        options:
+          - { label: "Men (USL League Two)", value: usl2 }
+          - { label: "Women (USL W League)", value: uslw }
+          - { label: "MWPL", value: mwpl }
+          - { label: "Club", value: club }
+      - { name: hero_photo, label: Main photo, widget: image }
+      - name: hero_photo_alt
+        label: Main photo description (alt text)
+        widget: string
+        hint: Describe what's in the photo for people using screen readers.
+      - name: summary
+        label: One-line summary
+        widget: string
+        hint: Shown on news cards. One sentence.
+      - { name: author, label: Author, widget: string }
+      - { name: body, label: Story, widget: markdown }
+
+  # ---------------------------------------------------------------- Players
+  - name: players
+    label: Players
+    label_singular: Player
+    description: One entry per player. At season end, untick Active instead of deleting. Tick Alumni for former players shown on the Club page.
+    folder: /content/players
+    extension: yml
+    format: yaml
+    create: true
+    identifier_field: name
+    slug: "{{team}}-{{name}}"
+    summary: "{{team}} · #{{number}} {{name}} · {{position}}"
+    sortable_fields: [name, team, number]
+    view_filters:
+      - { label: Active, field: active, pattern: true }
+      - { label: Alumni, field: alumni, pattern: true }
+      - { label: Men (USL2), field: team, pattern: usl2 }
+      - { label: Women (USL W), field: team, pattern: uslw }
+      - { label: MWPL, field: team, pattern: mwpl }
+    fields:
+      - name: team
+        label: Team
+        widget: select
+        options:
+          - { label: "USL League Two (men)", value: usl2 }
+          - { label: "USL W League (women)", value: uslw }
+          - { label: "Midwest Premier League", value: mwpl }
+      - { name: name, label: Name, widget: string }
+      - { name: number, label: Shirt number, widget: number, value_type: int, min: 0, max: 99, required: false }
+      - name: position
+        label: Position
+        widget: select
+        options: [Goalkeeper, Defender, Midfielder, Forward]
+      - { name: hometown, label: Hometown, widget: string, required: false }
+      - { name: college, label: College, widget: string, required: false }
+      - name: headshot
+        label: Headshot
+        widget: image
+        required: false
+        hint: Alt text is added automatically from the player's name.
+      - name: seasons
+        label: Seasons with RKC
+        widget: list
+        required: false
+        hint: One year per item, e.g. 2026.
+      - { name: active, label: Active this season, widget: boolean, default: true }
+      - { name: alumni, label: Show as alumni on the Club page, widget: boolean, default: false }
+      - name: current_club
+        label: Current club (alumni)
+        widget: string
+        required: false
+        hint: Alumni only. Where the player plays now.
+
+  # ---------------------------------------------------------------- Partners
+  - name: partners
+    label: Partners
+    label_singular: Partner
+    description: Sponsors and community partners. When a deal ends, untick Active instead of deleting.
+    folder: /content/partners
+    extension: yml
+    format: yaml
+    create: true
+    identifier_field: name
+    slug: "{{name}}"
+    summary: "{{name}} · {{category}}"
+    sortable_fields: [name]
+    view_filters:
+      - { label: Active, field: active, pattern: true }
+    fields:
+      - { name: name, label: Partner name, widget: string }
+      - name: category
+        label: Category
+        widget: select
+        options:
+          - { label: "Club partner (business sponsor)", value: club }
+          - { label: "Community partner (e.g. Root-Pike WIN)", value: community }
+        default: club
+      - name: logo
+        label: Logo
+        widget: image
+        hint: Use the logo file the partner approved. Alt text is added automatically from the partner's name.
+      - name: website
+        label: Website
+        widget: string
+        required: false
+        pattern: ['^https://', 'Must be a full link starting with https://']
+      - name: activation
+        label: One-line activation
+        widget: string
+        required: false
+        hint: What they do with RKC, e.g. "Presenting partner of Lake Michigan Night".
+      - { name: start_season, label: First season, widget: number, value_type: int, required: false }
+      - { name: active, label: Active, widget: boolean, default: true }
+
+  # ---------------------------------------------------------------- Staff
+  - name: staff
+    label: Staff
+    label_singular: Staff member
+    description: Front office and coaches. Shown on the Club page and each team page.
+    folder: /content/staff
+    extension: yml
+    format: yaml
+    create: true
+    identifier_field: name
+    slug: "{{name}}"
+    summary: "{{name}} · {{role}} · {{team}}"
+    sortable_fields: [name, team, order]
+    fields:
+      - { name: name, label: Name, widget: string }
+      - { name: role, label: Role, widget: string, hint: 'e.g. "Head Coach" or "Chief Operating Officer"' }
+      - name: team
+        label: Group
+        widget: select
+        options:
+          - { label: "Front office", value: front_office }
+          - { label: "USL League Two (men)", value: usl2 }
+          - { label: "USL W League (women)", value: uslw }
+          - { label: "Midwest Premier League", value: mwpl }
+      - name: photo
+        label: Photo
+        widget: image
+        required: false
+        hint: Alt text is added automatically from the person's name.
+      - { name: order, label: Display order, widget: number, value_type: int, required: false, hint: Lower numbers show first within the group. }
+
+# ---------------------------------------------------------------- Club settings
+singletons:
+  - name: settings
+    label: Club settings
+    file: /content/settings.yml
+    fields:
+      - name: season_mode
+        label: Season mode
+        widget: select
+        options:
+          - { label: "In season", value: in_season }
+          - { label: "Offseason", value: offseason }
+        default: offseason
+        hint: Offseason the day after the last home match. In season the day the fixture list is entered.
+      - { name: season_label, label: Current season label, widget: string, hint: 'e.g. "2027 season"' }
+      - name: banner_text
+        label: Header banner text
+        widget: string
+        required: false
+        hint: One line, e.g. "Season tickets on sale now." Leave blank to hide the banner.
+      - name: banner_link
+        label: Header banner link
+        widget: string
+        required: false
+      - name: tickets
+        label: Tickets
+        widget: object
+        fields:
+          - { name: adult_price, label: "Single match: adult ($)", widget: number, value_type: float, required: false }
+          - { name: youth_price, label: "Single match: kids under 12 ($)", widget: number, value_type: float, required: false }
+          - { name: season_ticket_price, label: Season ticket ($), widget: number, value_type: float, required: false }
+          - name: season_ticket_link
+            label: Season ticket link (vivenu)
+            widget: string
+            required: false
+            pattern: ['^https://', 'Must be a full link starting with https://']
+          - { name: season_tickets_on_sale, label: Season tickets on sale now, widget: boolean, default: false }
+          - name: season_ticket_message
+            label: Season ticket on-sale message
+            widget: string
+            required: false
+            hint: Shown in the offseason, e.g. "Season tickets go on sale in March."
