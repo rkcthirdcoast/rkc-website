@@ -1,13 +1,16 @@
 // Cloudflare settings for rkcthirdcoast.com.
-// The site is plain files: serve the repo folder as static assets.
-// Files listed in .assetsignore are kept out of the public site.
+// Eleventy builds the site into _site/, and only _site/ is published.
 {
   "name": "rkc-website",
   "compatibility_date": "2026-10-01",
-"previews": {},
-"preview_urls": true,
+  "previews": {},
+  "preview_urls": true,
+  "build": {
+    // Runs before every deploy and preview: turns content/ into pages.
+    "command": "npm run build"
+  },
   "assets": {
-    "directory": ".",
+    "directory": "./_site",
     "not_found_handling": "404-page",
     "html_handling": "auto-trailing-slash"
   }
