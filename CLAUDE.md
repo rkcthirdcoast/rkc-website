@@ -34,6 +34,7 @@ Where the two disagree, the scope doc wins. Where this file and the brief disagr
 - No carousels for anything a visitor needs. No autoplay video on phones.
 - Buttons say what happens: Get Tickets, View Matches, Become a Partner. Never "Learn more" or "Click here".
 - No text inside images. If a graphic shows a score, the score is also on the page as text.
+- Headings (H1–H6) never end with a period. A period inside a heading is fine ("Three teams. One club").
 - One H1 per page. Alt text on every meaningful image.
 
 ## Content rules
@@ -64,6 +65,7 @@ lib/               shared helpers: YAML reader, team labels, Central-time date f
 components.njk     /components/: shared components with placeholder data, for approval; noindex
 admin/             site editor (Sveltia CMS): index.html + config.yml. Content types and fields live in config.yml
 content/           what interns edit: matches/, news/, players/, partners/, staff/, settings.yml. Never hand-edit facts into pages
+images/brand/      approved club logos as SVG (rkc-crest.svg = full-color crest, from RKC Badge 1.ai). Never edit; replace from the source file
 images/uploads/    images uploaded through the editor (converted to WebP, 5 MB limit)
 _site/             build output; never committed
 ```

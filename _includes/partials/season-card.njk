@@ -1,0 +1,7 @@
+{#- Offseason stand-in for the next-match card. -#}
+<article class="match match--next">
+  <div class="match__meta"><span class="status status--next">Offseason</span></div>
+  <p class="match__when">{% if settings.season_label %}{{ settings.season_label }} schedule{% else %}Next season's schedule{% endif %} coming soon</p>
+  <p class="match__venue">We post the schedule here as soon as the leagues release it. Follow @rkcthirdcoast to hear first.</p>
+  <div class="btn-row"><a class="btn btn--secondary" href="{{ site.instagram }}">Follow on Instagram</a></div>
+</article>

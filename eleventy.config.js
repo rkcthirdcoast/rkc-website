@@ -27,6 +27,11 @@ export default function (eleventyConfig) {
   // Up to n other posts with the same team tag, newest first
   eleventyConfig.addFilter("relatedPosts", (posts, url, tag, n = 3) =>
     (posts || []).filter((p) => p.url !== url && p.data.team_tag === tag).slice().reverse().slice(0, n));
+  // Headings never end with a period (house style). Used on intern-written headlines.
+  eleventyConfig.addFilter("noEndPeriod", (t) => String(t ?? "").replace(/\s*\.+\s*$/, ""));
+  eleventyConfig.addFilter("head", (list, n) => (list || []).slice(0, n));
+  eleventyConfig.addFilter("activeWithLogo", (list) => (list || []).filter((p) => p.active !== false && p.logo));
+  eleventyConfig.addFilter("alumniList", (list) => (list || []).filter((p) => p.alumni));
   // "Sample City SC" -> "SCS": stand-in badge when an opponent has no logo
   eleventyConfig.addFilter("initials", (name) =>
     String(name || "").split(/\s+/).filter(Boolean).slice(0, 3).map((w) => w[0]).join("").toUpperCase());

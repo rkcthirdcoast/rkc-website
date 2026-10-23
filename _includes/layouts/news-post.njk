@@ -8,7 +8,7 @@ layout: layouts/base.njk
     <div class="hero__shade"></div>
     <div class="wrap">
       <p class="label label--quiet">{{ team_tag | teamLabel }} · <time datetime="{{ page.date | chicago('iso') }}">{{ page.date | chicago('long') }}</time></p>
-      <h1>{{ title }}</h1>
+      <h1>{{ title | noEndPeriod }}</h1>
       {% if summary %}<p class="hero__sub">{{ summary }}</p>{% endif %}
     </div>
   </section>
