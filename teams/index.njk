@@ -1,0 +1,28 @@
+---
+layout: layouts/base.njk
+title: Teams
+description: "RKC Third Coast FC's three senior teams: USL League Two, USL W League and the Midwest Premier League."
+permalink: /teams/
+---
+<section class="section">
+  <div class="wrap">
+    <div class="section__head">
+      <div class="stack">
+        <h1>Teams</h1>
+        <p class="match__venue">Three teams. One club, one home ground in Racine.</p>
+      </div>
+    </div>
+    <div class="grid grid--3">
+      {%- for t in teams %}
+      <a class="team-card" href="/teams/{{ t.code }}/"><span class="label label--quiet">{{ t.league }}</span><span class="team-card__name">{{ t.code | rkcName }}</span><span class="label">Meet the Squad</span></a>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+<section class="section section--mist" aria-labelledby="play-h">
+  <div class="wrap stack">
+    <h2 id="play-h">Want to play here?</h2>
+    <p class="prose">Fill in the player interest form and the coaches will reach out if there's a fit.</p>
+    <div class="btn-row"><a class="btn btn--primary" href="/play/">Player Interest Form</a></div>
+  </div>
+</section>

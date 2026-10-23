@@ -1,0 +1,92 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: teams
+  size: 1
+  alias: team
+permalink: "/teams/{{ team.code }}/"
+eleventyComputed:
+  title: "{{ team.code | rkcName }}"
+  seoTitle: "{{ team.code | rkcName }} · RKC Third Coast FC"
+  description: "Roster, coaches, schedule and news for RKC's {{ team.league }} team."
+---
+{%- from "partials/match.njk" import matchCard -%}
+{%- from "partials/news-card.njk" import newsCard -%}
+{%- set inSeason = settings.season_mode == "in_season" -%}
+{%- set teamMatches = matches | forTeam(team.code) -%}
+{%- set nextMatch = (teamMatches | upcoming)[0] -%}
+{%- set lastResult = (teamMatches | results)[0] -%}
+{%- set roster = players | forTeam(team.code) | activeOnly -%}
+{%- set coaches = staff | forTeam(team.code) -%}
+{%- set posts = (collections.news or []) | byTag(team.code) | reverse | head(3) -%}
+<section class="hero">
+  <div class="hero__shade"></div>
+  <div class="wrap">
+    <p class="label label--quiet">{{ team.league }}{% if settings.season_label %} · {{ settings.season_label }}{% endif %}</p>
+    <h1>{{ team.code | rkcName }}</h1>
+    <p class="hero__sub">{{ team.intro }}</p>
+  </div>
+</section>
+
+{%- if inSeason and (nextMatch or lastResult) %}
+<section class="section" aria-label="Next match and latest result">
+  <div class="wrap grid grid--2">
+    {% if nextMatch %}{{ matchCard(nextMatch, next=true) }}{% endif %}
+    {% if lastResult %}{{ matchCard(lastResult) }}{% endif %}
+  </div>
+</section>
+{%- endif %}
+
+<section class="section{% if inSeason and (nextMatch or lastResult) %} section--mist{% endif %}" aria-labelledby="roster-h">
+  <div class="wrap">
+    <div class="section__head"><h2 id="roster-h">Roster</h2></div>
+    {%- if roster.length %}
+    <div class="roster">
+      {%- for p in roster %}
+      <div class="player">
+        {% if p.headshot %}<img class="player__photo" src="{{ p.headshot }}" alt="{{ p.name }}" loading="lazy">{% else %}<div class="player__photo"></div>{% endif %}
+        <p class="player__name">{% if p.number or p.number == 0 %}<span class="player__num num">{{ p.number }}</span> {% endif %}{{ p.name }}</p>
+        <p class="player__meta">{{ p.position }}{% if p.hometown %} · {{ p.hometown }}{% endif %}{% if p.college %}<br>{{ p.college }}{% endif %}</p>
+      </div>
+      {%- endfor %}
+    </div>
+    {%- else %}
+    <p class="match__venue">The roster goes up once signings are announced. Follow <a href="{{ site.instagram }}">@rkcthirdcoast</a> for the latest.</p>
+    {%- endif %}
+  </div>
+</section>
+
+{%- if coaches.length %}
+<section class="section" aria-labelledby="coaches-h">
+  <div class="wrap">
+    <div class="section__head"><h2 id="coaches-h">Coaches</h2></div>
+    <div class="roster">
+      {%- for s in coaches %}
+      <div class="player">
+        {% if s.photo %}<img class="player__photo" src="{{ s.photo }}" alt="{{ s.name }}" loading="lazy">{% else %}<div class="player__photo"></div>{% endif %}
+        <p class="player__name">{{ s.name }}</p>
+        <p class="player__meta">{{ s.role }}</p>
+      </div>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{%- endif %}
+
+{%- if posts.length %}
+<section class="section section--mist" aria-labelledby="team-news-h">
+  <div class="wrap">
+    <div class="section__head"><h2 id="team-news-h">Latest news</h2><a class="link-arrow" href="/news/">All News</a></div>
+    <div class="grid grid--3">{% for post in posts %}{{ newsCard(post) }}{% endfor %}</div>
+  </div>
+</section>
+{%- endif %}
+
+<section class="section section--ink" aria-labelledby="play-h">
+  <div class="wrap stack">
+    <p class="label label--quiet">Play for RKC</p>
+    <h2 id="play-h">Want to play here?</h2>
+    <p class="prose">We're looking for college and high-level amateur players who want a serious summer: real training, real matches, and staff who hold you to a professional standard. Fill in the interest form and the coaches will reach out if there's a fit. A form doesn't guarantee a tryout.</p>
+    <div class="btn-row"><a class="btn btn--primary" href="{{ team.playForm }}">Player Interest Form</a></div>
+  </div>
+</section>
