@@ -25,12 +25,9 @@ sample:
 <section class="hero">
   <div class="hero__shade"></div>
   <div class="wrap">
-    <p class="label label--quiet">Buttons</p>
+    <p class="label label--quiet">Hero buttons · follow Club settings</p>
     <h1>Soccer on the Third Coast.</h1>
-    <div class="btn-row">
-      <a class="btn btn--primary" href="/tickets/">Get Tickets</a>
-      <a class="btn btn--secondary" href="/matches/">View Matches</a>
-    </div>
+    {% include "partials/hero-buttons.njk" %}
   </div>
 </section>
 
@@ -38,11 +35,10 @@ sample:
   <div class="wrap">
     <div class="section__head"><h2 id="cards-h">Match cards</h2></div>
     <div class="grid grid--2">
-      {{ matchCard(sample.next, next=true) }}
-      {{ matchCard(sample.win) }}
-      {{ matchCard(sample.loss) }}
-      {{ matchCard(sample.away) }}
-      {{ matchCard(sample.postponed) }}
+      {#- Date order, oldest first -#}
+      {%- for m in [sample.loss, sample.postponed, sample.win, sample.next, sample.away] | sort(false, false, "date") %}
+      {{ matchCard(m, next=(m == sample.next)) }}
+      {%- endfor %}
     </div>
   </div>
 </section>
