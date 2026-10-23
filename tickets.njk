@@ -30,8 +30,8 @@ showBottomBar: false
     {%- if t.season_tickets_on_sale or inSeason %}
     <article class="match{% if not inSeason %} match--next{% endif %}">
       <h2 class="match__when">Season ticket</h2>
-      {#- Brief: "across all three teams" stays off until Tim verifies the season ticket covers MWPL. -#}
-      <p>{% if t.season_ticket_price %}${{ t.season_ticket_price }} gets you into every RKC home match this season.{% else %}One ticket for every RKC home match this season.{% endif %}</p>
+      {#- Season ticket covers MWPL home matches: confirmed by Tim, 2026-10-23. -#}
+      <p>{% if t.season_ticket_price %}${{ t.season_ticket_price }} gets you into every RKC home match this season, across all three teams.{% else %}One ticket for every RKC home match this season, across all three teams.{% endif %}</p>
       {%- if t.season_tickets_on_sale and t.season_ticket_link %}
       <div class="btn-row"><a class="btn btn--primary" href="{{ t.season_ticket_link }}">Get Season Tickets</a></div>
       {%- elif t.season_ticket_message %}
@@ -66,8 +66,8 @@ showBottomBar: false
     <div class="stack"><h2 id="faq-h">Questions</h2></div>
     <div class="faq">
       <details open><summary>Where is it?</summary><div>{{ site.stadium.name }}, {{ site.stadium.street }}, {{ site.stadium.city }}. Full directions are on the <a href="/visit/">Visit page</a>.</div></details>
-      {#- Brief VERIFY: toddlers, rain policy and refunds stay off until confirmed. -#}
-      <details><summary>Do kids need a ticket?</summary><div>Kids under 12 need a youth ticket.</div></details>
+      {#- Toddlers free: confirmed by Tim, 2026-10-23. Brief VERIFY still open: rain policy and refunds stay off until confirmed. -#}
+      <details><summary>Do kids need a ticket?</summary><div>Kids under 12 need a youth ticket. Toddlers get in free.</div></details>
     </div>
   </div>
 </section>
