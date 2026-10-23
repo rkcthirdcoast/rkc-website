@@ -5,7 +5,6 @@ description: RKC Third Coast FC fields three senior teams at Pritchard Park Stad
 permalink: /club/
 ---
 {%- set alumni = players | alumniList -%}
-{%- set cleanup = partners | cleanupPartner -%}
 <section class="hero">
   <div class="hero__shade"></div>
   <div class="wrap">
@@ -48,9 +47,7 @@ permalink: /club/
   <div class="wrap stack">
     <h2 id="lake-h">The lake</h2>
     <p class="prose">The lake shapes how people here live, work and spend their summers. If we carry the Third Coast name, we help take care of it. That's why we run monthly cleanups, and why Lake Michigan Night is on the calendar every June.</p>
-    {%- if cleanup and cleanup.website %}
-    <div class="btn-row"><a class="btn btn--secondary" href="{{ cleanup.website }}">Join a Cleanup</a></div>
-    {%- endif %}
+    <div class="btn-row"><a class="btn btn--secondary" href="{{ site.cleanup }}">Join a Cleanup</a></div>
   </div>
 </section>
 
