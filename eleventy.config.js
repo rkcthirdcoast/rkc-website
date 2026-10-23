@@ -33,6 +33,17 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("byTag", (posts, tag) => (posts || []).filter((p) => p.data.team_tag === tag));
   eleventyConfig.addFilter("homeOnly", (list) => (list || []).filter((m) => m.home_away === "home"));
   eleventyConfig.addFilter("byCategory", (list, cat) => (list || []).filter((p) => (p.category || "club") === cat));
+  // Latest season's finished matches for one team, oldest first, with a W-D-L record.
+  eleventyConfig.addFilter("seasonResults", (matches, team) => {
+    const year = (m) => Number(new Intl.DateTimeFormat("en-US", { year: "numeric", timeZone: "America/Chicago" }).format(new Date(m.date)));
+    const finals = (matches || []).filter((m) => m.team === team && m.status === "final");
+    if (!finals.length) return null;
+    const latest = Math.max(...finals.map(year));
+    const list = finals.filter((m) => year(m) === latest).sort((a, b) => new Date(a.date) - new Date(b.date));
+    const w = list.filter((m) => m.rkc_score > m.opponent_score).length;
+    const l = list.filter((m) => m.rkc_score < m.opponent_score).length;
+    return { year: latest, list, w, d: list.length - w - l, l };
+  });
   eleventyConfig.addFilter("head", (list, n) => (list || []).slice(0, n));
   eleventyConfig.addFilter("activeWithLogo", (list) => (list || []).filter((p) => p.active !== false && p.logo));
   eleventyConfig.addFilter("alumniList", (list) => (list || []).filter((p) => p.alumni));

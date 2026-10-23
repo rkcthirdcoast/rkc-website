@@ -19,6 +19,8 @@ eleventyComputed:
 {%- set roster = players | forTeam(team.code) | activeOnly -%}
 {%- set coaches = staff | forTeam(team.code) -%}
 {%- set posts = (collections.news or []) | byTag(team.code) | reverse | head(3) -%}
+{%- set season = matches | seasonResults(team.code) -%}
+{%- from "partials/match.njk" import fixtureRow -%}
 <section class="hero">
   <div class="hero__shade"></div>
   <div class="wrap">
@@ -37,7 +39,22 @@ eleventyComputed:
 </section>
 {%- endif %}
 
-<section class="section{% if inSeason and (nextMatch or lastResult) %} section--mist{% endif %}" aria-labelledby="roster-h">
+{%- if season %}
+<section class="section section--mist" aria-labelledby="results-h">
+  <div class="wrap">
+    <div class="section__head">
+      <div class="stack">
+        <h2 id="results-h">{{ season.year }} results</h2>
+        <p class="label label--quiet num">{{ season.w }} {{ "win" if season.w == 1 else "wins" }} · {{ season.d }} {{ "draw" if season.d == 1 else "draws" }} · {{ season.l }} {{ "loss" if season.l == 1 else "losses" }}</p>
+      </div>
+      <a class="link-arrow" href="/matches/">All Matches</a>
+    </div>
+    <div class="fixture-list">{% for m in season.list %}{{ fixtureRow(m) }}{% endfor %}</div>
+  </div>
+</section>
+{%- endif %}
+
+<section class="section" aria-labelledby="roster-h">
   <div class="wrap">
     <div class="section__head"><h2 id="roster-h">Roster</h2></div>
     {%- if roster.length %}
