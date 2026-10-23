@@ -207,8 +207,8 @@ collections:
     create: true
     identifier_field: name
     slug: "{{name}}"
-    summary: "{{name}} · {{category}} · {{tier}}"
-    sortable_fields: [name, tier]
+    summary: "{{name}} · {{category}}"
+    sortable_fields: [name]
     view_filters:
       - { label: Active, field: active, pattern: true }
     fields:
@@ -220,16 +220,6 @@ collections:
           - { label: "Club partner (business sponsor)", value: club }
           - { label: "Community partner (e.g. Root-Pike WIN)", value: community }
         default: club
-      - name: tier
-        label: Tier
-        widget: select
-        # PLACEHOLDER tier names: replace with the club's real sponsorship tiers.
-        options:
-          - { label: "Tier 1", value: tier1 }
-          - { label: "Tier 2", value: tier2 }
-          - { label: "Tier 3", value: tier3 }
-        required: false
-        hint: Club partners only.
       - name: logo
         label: Logo
         widget: image
