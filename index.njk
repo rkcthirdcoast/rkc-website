@@ -38,6 +38,8 @@ permalink: /
   </div>
 </section>
 
+{#- In season the next match leads; in the offseason the teams lead and the "schedule coming soon" card follows them. -#}
+{%- set matchBlock -%}
 <section class="section" aria-label="Next match and latest result">
   <div class="wrap grid grid--2">
     {%- if inSeason and nextMatch %}
@@ -51,6 +53,8 @@ permalink: /
     {%- endif %}
   </div>
 </section>
+{%- endset %}
+{% if inSeason %}{{ matchBlock | safe }}{% endif %}
 
 <section class="section section--mist" aria-labelledby="teams-h">
   <div class="wrap">
@@ -62,6 +66,8 @@ permalink: /
     </div>
   </div>
 </section>
+
+{% if not inSeason %}{{ matchBlock | safe }}{% endif %}
 
 <section class="section section--ink" aria-labelledby="why-h">
   <div class="wrap">
