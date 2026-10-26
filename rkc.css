@@ -342,6 +342,12 @@ div.player__photo, div.news-card__img { border: 1px solid var(--line); }   /* em
 /* Embedded donation form (Zeffy, Get Involved only) */
 .donate-frame { width: 100%; min-height: 640px; border: 0; border-radius: var(--radius); background: var(--paper); }
 
+/* ---------- Fact sheet (Press) ---------- */
+.facts { margin: 0; border-top: 1px solid var(--line); max-width: 48rem; }
+.facts > div { display: grid; gap: var(--s1); padding-block: var(--s3); border-bottom: 1px solid var(--line); }
+.facts dt { font-size: var(--fs-xs); font-weight: 600; letter-spacing: var(--track-label); text-transform: uppercase; color: var(--stone); }
+.facts dd { margin: 0; }
+
 /* ---------- FAQ accordion ---------- */
 .faq { border-top: 1px solid var(--line); }
 .faq details { border-bottom: 1px solid var(--line); }
@@ -385,6 +391,7 @@ div.player__photo, div.news-card__img { border: 1px solid var(--line); }   /* em
   .partners { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .fixture { grid-template-columns: 11rem 1fr auto; align-items: center; }
   .fixture__date { grid-column: auto; }
+  .facts > div { grid-template-columns: 13rem 1fr; gap: var(--s4); }
   .hero .wrap { padding-block: var(--s9) var(--s8); }
   .site-footer .wrap { grid-template-columns: 2fr 1fr 1fr; }
   .footer-legal { grid-column: 1 / -1; }
