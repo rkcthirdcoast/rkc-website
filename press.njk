@@ -1,0 +1,82 @@
+---
+layout: layouts/base.njk
+title: Press & Media
+seoTitle: "Press & Media · RKC Third Coast FC"
+description: Media contact, matchday credentials, club boilerplate, fact sheet and logo downloads for RKC Third Coast FC.
+permalink: /press/
+---
+{%- set press = settings.press or {} -%}
+<section class="section">
+  <div class="wrap stack">
+    <h1>Press & Media</h1>
+    <p class="match__venue">Contact, credentials, boilerplate and logos for anyone covering RKC Third Coast.</p>
+  </div>
+</section>
+
+<section class="section section--mist" aria-labelledby="contact-h">
+  <div class="wrap split">
+    <div class="stack">
+      <h2 id="contact-h">Media contact</h2>
+      {%- if press.contact_email %}
+      <p>{% if press.contact_name %}<strong>{{ press.contact_name }}</strong>, RKC Third Coast<br>{% endif %}<a href="mailto:{{ press.contact_email }}">{{ press.contact_email }}</a>{% if press.contact_email_alt %}<br><a href="mailto:{{ press.contact_email_alt }}">{{ press.contact_email_alt }}</a>{% endif %}</p>
+      {%- else %}
+      <p>Use the <a href="/contact/">contact form</a> and pick Media as the topic.</p>
+      {%- endif %}
+    </div>
+    <div class="stack prose">
+      <p>Interview requests, matchday credentials and fact-checks. On match weeks, expect a same-day reply.</p>
+      <h3>Matchday credentials</h3>
+      <p>Email by the Thursday before a home match and we'll have you on the list at the gate. Players and coaches are available after the final whistle. Ask at the contact above and we'll set it up.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="boiler-h">
+  <div class="wrap stack">
+    <h2 id="boiler-h">Boilerplate</h2>
+    <div class="prose">
+      <p class="label label--quiet">One sentence</p>
+      <p>RKC Third Coast is a community soccer club rooted in Racine and Kenosha, Wisconsin, fielding men's and women's teams in USL League Two, the USL W League, and the Midwest Premier League, with home matches at Pritchard Park on the Lake Michigan shore.</p>
+      <p class="label label--quiet">Short (about 50 words)</p>
+      <p>RKC Third Coast is a community soccer club rooted in Racine and Kenosha, Wisconsin, on the Lake Michigan shore between Milwaukee and Chicago. Founded in 2023, the club fields three senior teams — men in USL League Two and the Midwest Premier League, women in the USL W League — giving college players a summer home to chase the next level. Home matches are at Pritchard Park Stadium.</p>
+      <p class="label label--quiet">Full (about 120 words)</p>
+      <p>RKC Third Coast is a community soccer club rooted in Racine and Kenosha, Wisconsin, on the Lake Michigan shore between Milwaukee and Chicago. Founded in 2023, the club fields three senior teams — men in USL League Two and the Midwest Premier League, women in the USL W League — and plays its home matches at Pritchard Park Stadium. The club exists to give college players a summer home to chase the next level: RKC alumni have gone on to MLS, MLS NEXT Pro, and USL League One contracts, led by defender Max Floriani, the No. 2 overall pick in the 2025 MLS SuperDraft. The club runs on volunteers, interns, and local business partners, and looks after the Third Coast shoreline with monthly cleanups at Eichelman Park in Kenosha.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section--mist" aria-labelledby="facts-h">
+  <div class="wrap stack">
+    <h2 id="facts-h">Fact sheet</h2>
+    <dl class="facts">
+      <div><dt>Club</dt><dd>RKC Third Coast (RKC Third Coast FC)</dd></div>
+      <div><dt>Based</dt><dd>Racine and Kenosha, Wisconsin</dd></div>
+      <div><dt>Founded</dt><dd>2023. First competitive match May 20, 2023, at Minneapolis City SC</dd></div>
+      <div><dt>Teams</dt><dd>USL League Two (men) · USL W League (women) · Midwest Premier League (men)</dd></div>
+      <div><dt>Home ground</dt><dd>{{ site.stadium.name }}, {{ site.stadium.street }}, {{ site.stadium.city }}, {{ site.stadium.region }} {{ site.stadium.zip }}</dd></div>
+      <div><dt>Colors</dt><dd>Blue #084E97 · Gold #F8C23B · Red #A21D22</dd></div>
+      {%- if press.contact_email %}
+      <div><dt>Media contact</dt><dd>{% if press.contact_name %}{{ press.contact_name }}, {% endif %}<a href="mailto:{{ press.contact_email }}">{{ press.contact_email }}</a></dd></div>
+      {%- endif %}
+      <div><dt>Web & social</dt><dd><a href="{{ site.url }}">rkcthirdcoast.com</a> · <a href="{{ site.instagram }}">@rkcthirdcoast</a> (Instagram)</dd></div>
+      {%- if press.audience %}
+      <div><dt>Audience</dt><dd>{{ press.audience }}</dd></div>
+      {%- endif %}
+      {%- if press.alumnus %}
+      <div><dt>Notable alumnus</dt><dd>{{ press.alumnus }}</dd></div>
+      {%- endif %}
+      <div><dt>Community</dt><dd>Monthly shoreline cleanups at Eichelman Park, Kenosha · Lake Fact Friday series</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="logos-h">
+  <div class="wrap stack">
+    <h2 id="logos-h">Logos and brand</h2>
+    {#- Only the full-color crest SVG exists so far. Add PNGs (full color, white, black) and the wordmark here once exported from RKC Badge 1.ai. -#}
+    <div class="prose">
+      <p>Brand colors: blue #084E97, gold #F8C23B, red #A21D22. Please don't recolor, stretch or re-typeset the crest. For other formats or usage questions, ask the media contact above.</p>
+    </div>
+    <div class="btn-row"><a class="btn btn--secondary" href="/images/brand/rkc-crest.svg" download="rkc-third-coast-crest.svg">Download Crest (SVG)</a></div>
+  </div>
+</section>
