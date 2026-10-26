@@ -63,7 +63,7 @@ _includes/         layouts/ (base, news-post) and partials/ (header, footer, mat
 _data/             loaders that read content/ (matches, players, partners, staff, settings) plus site.js constants
 lib/               shared helpers: YAML reader, team labels, Central-time date formats
 components.njk     /components/: shared components with placeholder data, for approval; noindex
-index.njk ...      one .njk per page: index, matches, club, tickets, visit, partners, get-involved, contact, play, privacy, 404
+index.njk ...      one .njk per page: index, matches, club, tickets, visit, partners, get-involved, contact, play, press, privacy, 404
 teams/             team.njk builds /teams/usl2/, /teams/uslw/, /teams/mwpl/ from _data/teams.js; index.njk is /teams/
 news/index.njk     /news/ list; posts themselves live in content/news/
 _redirects         old Duda URLs -> new pages (301). Add every URL from the Duda export before cutover

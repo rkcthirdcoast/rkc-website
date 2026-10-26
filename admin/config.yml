@@ -339,3 +339,29 @@ singletons:
             widget: string
             required: false
             hint: Shown in the offseason, e.g. "Season tickets go on sale in March."
+      - name: press
+        label: Press page
+        widget: object
+        hint: Shown on /press/. Update the audience number and alumnus line when they change.
+        fields:
+          - { name: contact_name, label: Media contact name, widget: string, required: false }
+          - name: contact_email
+            label: Media contact email
+            widget: string
+            required: false
+            pattern: ['^[^@\s]+@[^@\s]+\.[^@\s]+$', 'Enter a full email address']
+          - name: contact_email_alt
+            label: Second media email (optional)
+            widget: string
+            required: false
+            pattern: ['^[^@\s]+@[^@\s]+\.[^@\s]+$', 'Enter a full email address']
+          - name: audience
+            label: Audience line
+            widget: string
+            required: false
+            hint: 'Include the date range and source, e.g. "More than 1.3 million Instagram views, January–September 2026 (club Insights)"'
+          - name: alumnus
+            label: Notable alumnus line
+            widget: string
+            required: false
+            hint: Name, achievement and current club. Update when the player moves.

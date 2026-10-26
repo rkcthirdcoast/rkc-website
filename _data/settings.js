@@ -7,4 +7,5 @@ export default () =>
     banner_text: "",
     banner_link: "",
     tickets: {},
+    press: {},
   });
