@@ -5,7 +5,7 @@ description: Player interest forms for RKC Third Coast FC's men's (USL League Tw
 permalink: /play/
 showBottomBar: false
 ---
-{%- from "partials/form.njk" import siteForm -%}
+{%- from "partials/form.njk" import siteForm with context -%}
 {%- macro playerFields(prefix) -%}
 <div class="field"><label for="{{ prefix }}-name">Name</label><input id="{{ prefix }}-name" name="name" autocomplete="name" required></div>
 <div class="field"><label for="{{ prefix }}-email">Email</label><input id="{{ prefix }}-email" name="email" type="email" inputmode="email" autocomplete="email" required></div>

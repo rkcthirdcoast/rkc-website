@@ -43,4 +43,36 @@
   document.querySelectorAll("form[data-offline]").forEach(function (f) {
     f.addEventListener("submit", function (e) { e.preventDefault(); });
   });
+
+  // Live forms send in the background and show the result on the page.
+  // Without this script the form still posts, and the form service shows a plain thank-you.
+  document.querySelectorAll("form[data-form]:not([data-offline])").forEach(function (f) {
+    var status = f.querySelector("[data-form-status]");
+    var button = f.querySelector('[type="submit"]');
+    if (!status || !window.fetch) return;
+    f.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var data = new URLSearchParams(new FormData(f));
+      data.append("_js", "1");
+      button.disabled = true;
+      status.hidden = true;
+      fetch(f.action, { method: "POST", body: data })
+        .then(function (r) { return r.json(); })
+        .then(function (res) {
+          if (!res.ok) throw new Error("not accepted");
+          f.reset();
+          status.className = "prose";
+          status.textContent = f.dataset.thanks || "Thanks. We got it.";
+        })
+        .catch(function () {
+          status.className = "field__error";
+          status.textContent = status.dataset.error;
+        })
+        .then(function () {
+          status.hidden = false;
+          button.disabled = false;
+          status.focus();
+        });
+    });
+  });
 })();

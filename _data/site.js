@@ -17,9 +17,10 @@ export default {
     zip: "53406",
     maps: "https://www.google.com/maps/search/?api=1&query=Pritchard+Park+Stadium%2C+2800+Ohio+St%2C+Racine%2C+WI+53406",
   },
-  // Where the site's forms send. Empty = forms show as "not connected yet" and can't be submitted.
-  // Set once Tim picks a form service (see the all-pages PR).
-  forms: { endpoint: "" },
+  // Where the site's forms send. Empty = forms show as "not switched on yet" and can't be submitted.
+  // Google Apps Script web app "RKC Website Forms" in tim.gallion.rkc@gmail.com: saves each form to the
+  // RKC Website Forms Sheet (one tab per form) and emails tim@rkcthirdcoast.com. Who gets emailed is set in the script.
+  forms: { endpoint: "https://script.google.com/macros/s/AKfycbyYRhHqpj6pzcblFCPOsvLbq1SeQyawPmLgEdFnmbS60CscP8vomvgfkGrnD6gtKwgSzg/exec" },
   // Until launch, ask search engines not to index the preview addresses.
   prelaunch: true,
   nav: [
