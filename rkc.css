@@ -339,6 +339,13 @@ div.player__photo, div.news-card__img { border: 1px solid var(--line); }   /* em
 .field__error { color: var(--red); font-size: var(--fs-sm); font-weight: 600; }
 .field--invalid input, .field--invalid select, .field--invalid textarea { border-color: var(--red); }
 
+/* Choice groups: radio buttons and checkboxes (player interest forms) */
+.choices { display: grid; gap: var(--s1); min-width: 0; margin: 0; padding: 0; border: 0; }
+.choices legend { padding: 0; margin-bottom: var(--s2); font-weight: 600; font-size: var(--fs-sm); }
+.choice { display: flex; align-items: center; gap: var(--s3); min-height: var(--tap); font-size: var(--fs-md); cursor: pointer; }
+.choice input { flex: none; width: 1.25rem; height: 1.25rem; margin: 0; accent-color: var(--ink); }
+.choice input:focus-visible { outline: 3px solid rgba(162,30,35,.25); outline-offset: 2px; }
+
 /* Embedded donation form (Zeffy, Get Involved only) */
 .donate-frame { width: 100%; min-height: 640px; border: 0; border-radius: var(--radius); background: var(--paper); }
 
