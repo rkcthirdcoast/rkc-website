@@ -12,6 +12,7 @@ showBottomBar: false
 <div class="field"><label for="{{ prefix }}-last">Last name</label><input id="{{ prefix }}-last" name="last_name" autocomplete="family-name" required></div>
 <div class="field"><label for="{{ prefix }}-email">Email</label><input id="{{ prefix }}-email" name="email" type="email" inputmode="email" autocomplete="email" required></div>
 <div class="field"><label for="{{ prefix }}-phone">Mobile phone number</label><input id="{{ prefix }}-phone" name="mobile_phone" type="tel" inputmode="tel" autocomplete="tel" required></div>
+<div class="field"><label for="{{ prefix }}-address">Address</label><input id="{{ prefix }}-address" name="address" autocomplete="street-address" placeholder="Street, city, state, ZIP" required></div>
 <fieldset class="choices"><legend>Desired team</legend>
 {%- for team in teams %}
 <label class="choice"><input type="radio" name="desired_team" value="{{ team }}"{% if teams.length == 1 %} checked{% endif %} required>{{ team }}</label>
