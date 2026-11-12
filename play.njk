@@ -6,15 +6,28 @@ permalink: /play/
 showBottomBar: false
 ---
 {%- from "partials/form.njk" import siteForm -%}
-{%- macro playerFields(prefix) -%}
-<div class="field"><label for="{{ prefix }}-name">Name</label><input id="{{ prefix }}-name" name="name" autocomplete="name" required></div>
+{#- Player interest fields, shared by both forms. Matches the club's Google player form; one email and one phone field. -#}
+{%- macro playerFields(prefix, teams) -%}
+<div class="field"><label for="{{ prefix }}-first">First name</label><input id="{{ prefix }}-first" name="first_name" autocomplete="given-name" required></div>
+<div class="field"><label for="{{ prefix }}-last">Last name</label><input id="{{ prefix }}-last" name="last_name" autocomplete="family-name" required></div>
 <div class="field"><label for="{{ prefix }}-email">Email</label><input id="{{ prefix }}-email" name="email" type="email" inputmode="email" autocomplete="email" required></div>
-<div class="field"><label for="{{ prefix }}-phone">Phone (optional)</label><input id="{{ prefix }}-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel"></div>
-<div class="field"><label for="{{ prefix }}-pos">Position</label><select id="{{ prefix }}-pos" name="position"><option>Goalkeeper</option><option>Defender</option><option>Midfielder</option><option>Forward</option></select></div>
-<div class="field"><label for="{{ prefix }}-club">Current college or club</label><input id="{{ prefix }}-club" name="current_team"></div>
-<div class="field"><label for="{{ prefix }}-home">Hometown</label><input id="{{ prefix }}-home" name="hometown"></div>
-<div class="field"><label for="{{ prefix }}-video">Highlight video link (optional)</label><input id="{{ prefix }}-video" name="video" type="url" inputmode="url"></div>
-<div class="field"><label for="{{ prefix }}-msg">Anything else the coaches should know</label><textarea id="{{ prefix }}-msg" name="message"></textarea></div>
+<div class="field"><label for="{{ prefix }}-phone">Mobile phone number</label><input id="{{ prefix }}-phone" name="mobile_phone" type="tel" inputmode="tel" autocomplete="tel" required></div>
+<fieldset class="choices"><legend>Desired team</legend>
+{%- for team in teams %}
+<label class="choice"><input type="radio" name="desired_team" value="{{ team }}"{% if teams.length == 1 %} checked{% endif %}>{{ team }}</label>
+{%- endfor %}
+</fieldset>
+<div class="field"><label for="{{ prefix }}-level">Highest level of play achieved</label><select id="{{ prefix }}-level" name="highest_level" required><option value="">Choose</option><option>Semi-Pro</option><option>National Team</option><option>D1 (NCAA)</option><option>D2 (NCAA)</option><option>D3 (NCAA)</option><option>NAIA</option><option>Other</option></select></div>
+<div class="field"><label for="{{ prefix }}-club">Current or last club you competed with (optional)</label><input id="{{ prefix }}-club" name="club"></div>
+<div class="field"><label for="{{ prefix }}-college">Current or last university or college (if applicable)</label><input id="{{ prefix }}-college" name="college"></div>
+<fieldset class="choices"><legend>Primary position(s)</legend>
+{%- for pos in ["Goalkeeper (GK)", "Center Back (CB)", "Outside Back (RB/LB)", "Center Midfielder (CM/CDM)", "Attacking Midfielder (CAM/No. 10)", "Winger (LW/RW)", "Striker (ST/CF)"] %}
+<label class="choice"><input type="checkbox" name="positions" value="{{ pos }}">{{ pos }}</label>
+{%- endfor %}
+</fieldset>
+<div class="field"><label for="{{ prefix }}-awards">Awards, honors or significant achievements (optional)</label><textarea id="{{ prefix }}-awards" name="awards" placeholder="All-Conference, MVP, professional contract"></textarea></div>
+<div class="field"><label for="{{ prefix }}-refs">Playing references: coach or director, with contact information</label><textarea id="{{ prefix }}-refs" name="references" placeholder="Name, role, phone or email" required></textarea></div>
+<div class="field"><label for="{{ prefix }}-video">Link to highlight video or player profile (optional)</label><input id="{{ prefix }}-video" name="video" type="url" inputmode="url" placeholder="YouTube, Hudl or Productive Recruit"></div>
 {%- endmacro -%}
 <section class="section">
   <div class="wrap stack">
@@ -28,7 +41,7 @@ showBottomBar: false
       <h2 id="men-h">Men</h2>
       <p class="match__venue">USL League Two and Midwest Premier League. Goes to the men's program staff.</p>
     </div>
-    {% call siteForm("player-men", "Send to the Men's Staff", "men-form") %}{{ playerFields("m") }}{% endcall %}
+    {% call siteForm("player-men", "Send to the Men's Staff", "men-form") %}{{ playerFields("m", ["USL League 2", "USL Academy U20 Reserve team", "MWPL Reserve Team"]) }}{% endcall %}
   </div>
 </section>
 <section class="section" id="women" aria-labelledby="women-h">
@@ -37,6 +50,6 @@ showBottomBar: false
       <h2 id="women-h">Women</h2>
       <p class="match__venue">USL W League. Goes to the women's program staff.</p>
     </div>
-    {% call siteForm("player-women", "Send to the Women's Staff", "women-form") %}{{ playerFields("w") }}{% endcall %}
+    {% call siteForm("player-women", "Send to the Women's Staff", "women-form") %}{{ playerFields("w", ["USL W League"]) }}{% endcall %}
   </div>
 </section>
