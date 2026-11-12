@@ -82,7 +82,7 @@ _site/             build output; never committed
 - News post text is never run through Nunjucks, so `{{` in a post is safe.
 - Pages are built when something merges, not live. "Next match" is decided at build time.
 - `site.prelaunch` in `_data/site.js` adds `noindex` to every page. Set it to `false` at cutover.
-- Every form uses `partials/form.njk` and posts to `site.forms.endpoint`. While that is empty, forms show "not switched on yet" and can't submit.
+- Every form uses `partials/form.njk` and posts to `site.forms.endpoint`: the Google Apps Script web app "RKC Website Forms" in tim.gallion.rkc@gmail.com. It saves each submission to the RKC Website Forms Sheet (one tab per form) and emails the people listed in the script's ROUTES. Field `name`s become the Sheet columns, so keep them stable. With `site.js`, forms send in the background and show the thank-you on the page. If `endpoint` is empty, forms show "not switched on yet" and can't submit.
 - Facts the brief marks VERIFY stay out of the pages (a `{#- Brief VERIFY ... -#}` comment marks each spot) until Tim confirms them.
 
 Pages and `_redirects` are added as the build proceeds; update this section when they are.

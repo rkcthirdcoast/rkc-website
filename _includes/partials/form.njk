@@ -5,13 +5,24 @@
 -#}
 {% macro siteForm(name, submitLabel, id) %}
 {%- set live = site.forms.endpoint -%}
-<form class="form" id="{{ id or (name + '-form') }}" method="post" action="{{ site.forms.endpoint or '#' }}" data-form="{{ name }}"{% if not live %} data-offline{% endif %}>
+{%- set thanksBy = {
+  "player-men": "Thanks. The men's staff has your form and will reach out if there's a fit.",
+  "player-women": "Thanks. The women's staff has your form and will reach out if there's a fit.",
+  "volunteer": "Thanks for signing up. We'll send you the volunteer schedule.",
+  "contact": "Thanks. Your message is in and we'll get back to you."
+} -%}
+{%- set thanks = thanksBy[name] -%}
+<form class="form" id="{{ id or (name + '-form') }}" method="post" action="{{ site.forms.endpoint or '#' }}" data-form="{{ name }}"{% if thanks %} data-thanks="{{ thanks }}"{% endif %}{% if not live %} data-offline{% endif %}>
   <input type="hidden" name="form" value="{{ name }}">
   {#- Spam trap: people never see or fill this field. -#}
   <div hidden><label>Leave this empty <input name="website" tabindex="-1" autocomplete="off"></label></div>
   {{ caller() }}
   {%- if not live %}
   <p class="field__error" role="note">This form isn't switched on yet.{% if settings.contact_email %} Email <a href="mailto:{{ settings.contact_email }}">{{ settings.contact_email }}</a> instead.{% endif %}</p>
+  {%- endif %}
+  {%- if live %}
+  {#- site.js fills this in after sending: thank-you or error. -#}
+  <p data-form-status role="status" tabindex="-1" hidden data-error="That didn't send. Check your connection and try again{% if settings.contact_email %}, or email {{ settings.contact_email }}{% endif %}."></p>
   {%- endif %}
   <div class="btn-row"><button class="btn btn--primary" type="submit"{% if not live %} disabled{% endif %}>{{ submitLabel }}</button></div>
 </form>
