@@ -39,6 +39,19 @@
   var select = document.getElementById("c-topic");
   if (topic && select && select.querySelector('option[value="' + topic + '"]')) select.value = topic;
 
+  // Checkbox groups marked data-require-one: at least one box must be ticked before the form sends.
+  document.querySelectorAll("fieldset[data-require-one]").forEach(function (group) {
+    var boxes = group.querySelectorAll('input[type="checkbox"]');
+    if (!boxes.length) return;
+    var check = function () {
+      var any = Array.prototype.some.call(boxes, function (b) { return b.checked; });
+      boxes[0].setCustomValidity(any ? "" : "Tick at least one.");
+    };
+    boxes.forEach(function (b) { b.addEventListener("change", check); });
+    if (group.form) group.form.addEventListener("reset", function () { setTimeout(check, 0); });
+    check();
+  });
+
   // Forms that aren't connected yet never submit.
   document.querySelectorAll("form[data-offline]").forEach(function (f) {
     f.addEventListener("submit", function (e) { e.preventDefault(); });
