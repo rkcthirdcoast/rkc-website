@@ -9,9 +9,10 @@
   <div class="wrap">
     <a class="brand" href="/" aria-label="RKC Third Coast FC home">
       <img class="brand__crest" src="/images/brand/rkc-crest.svg" alt="" width="40" height="60">
-      {#- Stand-in Bell MT lockup until the real SVG is exported. -#}
+      {#- Stand-in Bell MT lockup until the real SVG is exported. Phones don't have Bell MT and fall back to a wider font,
+           so textLength squeezes the name to fit the viewBox on every device (otherwise the last C gets cut off). -#}
       <svg class="brand__name" viewBox="0 0 220 22" aria-hidden="true">
-        <text x="0" y="17" font-family="'Bell MT', Georgia, 'Times New Roman', serif" font-weight="700" font-size="18" letter-spacing="1.2" fill="#ffffff">RKC THIRD COAST FC</text>
+        <text x="0" y="17" font-family="'Bell MT', Georgia, 'Times New Roman', serif" font-weight="700" font-size="18" textLength="218" lengthAdjust="spacingAndGlyphs" fill="#ffffff">RKC THIRD COAST FC</text>
       </svg>
     </a>
     <nav class="nav" aria-label="Main">
