@@ -6,7 +6,7 @@ permalink: /play/
 showBottomBar: false
 ---
 {%- from "partials/form.njk" import siteForm -%}
-{#- Player interest fields, shared by both forms. Matches the club's Google player form; one email and one phone field. -#}
+{#- Player interest fields, shared by both forms. Matches the club's Google player form; one email and one phone field. Every field is required (Tim, 2026-11-11); site.js makes at least one position required. -#}
 {%- macro playerFields(prefix, teams) -%}
 <div class="field"><label for="{{ prefix }}-first">First name</label><input id="{{ prefix }}-first" name="first_name" autocomplete="given-name" required></div>
 <div class="field"><label for="{{ prefix }}-last">Last name</label><input id="{{ prefix }}-last" name="last_name" autocomplete="family-name" required></div>
@@ -14,20 +14,20 @@ showBottomBar: false
 <div class="field"><label for="{{ prefix }}-phone">Mobile phone number</label><input id="{{ prefix }}-phone" name="mobile_phone" type="tel" inputmode="tel" autocomplete="tel" required></div>
 <fieldset class="choices"><legend>Desired team</legend>
 {%- for team in teams %}
-<label class="choice"><input type="radio" name="desired_team" value="{{ team }}"{% if teams.length == 1 %} checked{% endif %}>{{ team }}</label>
+<label class="choice"><input type="radio" name="desired_team" value="{{ team }}"{% if teams.length == 1 %} checked{% endif %} required>{{ team }}</label>
 {%- endfor %}
 </fieldset>
 <div class="field"><label for="{{ prefix }}-level">Highest level of play achieved</label><select id="{{ prefix }}-level" name="highest_level" required><option value="">Choose</option><option>Semi-Pro</option><option>National Team</option><option>D1 (NCAA)</option><option>D2 (NCAA)</option><option>D3 (NCAA)</option><option>NAIA</option><option>Other</option></select></div>
-<div class="field"><label for="{{ prefix }}-club">Current or last club you competed with (optional)</label><input id="{{ prefix }}-club" name="club"></div>
-<div class="field"><label for="{{ prefix }}-college">Current or last university or college (if applicable)</label><input id="{{ prefix }}-college" name="college"></div>
-<fieldset class="choices"><legend>Primary position(s)</legend>
+<div class="field"><label for="{{ prefix }}-club">Current or last club you competed with</label><input id="{{ prefix }}-club" name="club" required></div>
+<div class="field"><label for="{{ prefix }}-college">Current or last university or college</label><input id="{{ prefix }}-college" name="college" placeholder="Write None if you haven't played in college" required></div>
+<fieldset class="choices" data-require-one><legend>Primary position(s)</legend>
 {%- for pos in ["Goalkeeper (GK)", "Center Back (CB)", "Outside Back (RB/LB)", "Center Midfielder (CM/CDM)", "Attacking Midfielder (CAM/No. 10)", "Winger (LW/RW)", "Striker (ST/CF)"] %}
 <label class="choice"><input type="checkbox" name="positions" value="{{ pos }}">{{ pos }}</label>
 {%- endfor %}
 </fieldset>
-<div class="field"><label for="{{ prefix }}-awards">Awards, honors or significant achievements (optional)</label><textarea id="{{ prefix }}-awards" name="awards" placeholder="All-Conference, MVP, professional contract"></textarea></div>
+<div class="field"><label for="{{ prefix }}-awards">Awards, honors or significant achievements</label><textarea id="{{ prefix }}-awards" name="awards" placeholder="All-Conference, MVP, professional contract. Write None if none" required></textarea></div>
 <div class="field"><label for="{{ prefix }}-refs">Playing references: coach or director, with contact information</label><textarea id="{{ prefix }}-refs" name="references" placeholder="Name, role, phone or email" required></textarea></div>
-<div class="field"><label for="{{ prefix }}-video">Link to highlight video or player profile (optional)</label><input id="{{ prefix }}-video" name="video" type="url" inputmode="url" placeholder="YouTube, Hudl or Productive Recruit"></div>
+<div class="field"><label for="{{ prefix }}-video">Link to highlight video or player profile</label><input id="{{ prefix }}-video" name="video" type="url" inputmode="url" placeholder="YouTube, Hudl or Productive Recruit link" required></div>
 {%- endmacro -%}
 <section class="section">
   <div class="wrap stack">
