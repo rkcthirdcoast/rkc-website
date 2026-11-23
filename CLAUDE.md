@@ -41,7 +41,7 @@ Where the two disagree, the scope doc wins. Where this file and the brief disagr
 
 - **Never type changing facts into page code**: dates, kickoff times, opponents, scores, ticket prices and links, sponsor names and logos, roster names, season year. These live in the content types (Match, News post, Player, Partner, Staff, Club settings). If asked to hard-code one, put it in the content type instead.
 - Anything marked **VERIFY** in the brief stays off the live site until Tim confirms it.
-- Do not write "501(c)(3)" anywhere until the IRS letter arrives. Use "becoming a nonprofit".
+- RKC became a nonprofit in fall 2026 (Tim, 2026-11-22). Do not write "501(c)(3)" anywhere until the IRS letter arrives.
 - No mention of youth programs or a youth academy at launch.
 - Don't call the MWPL team a reserve or second team.
 - Player interest forms live at `/play`: one form for men (USL League Two and MWPL), one for women (USL W League).
