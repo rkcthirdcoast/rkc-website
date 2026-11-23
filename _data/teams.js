@@ -19,6 +19,11 @@ export default [
     code: "uslw",
     league: "USL W League",
     pageTitle: "RKC Third Coast Women",
+    photo: {
+      src: "/images/teams/uslw-1400.webp",
+      srcSmall: "/images/teams/uslw-800.webp",
+      alt: "RKC Third Coast women's players smiling and celebrating together in front of the goal during a home match against Rochester FC",
+    },
     logo: { src: "/images/leagues/uslw.webp", width: 96, height: 56 },
     playForm: "/play/#women",
     intro:
