@@ -234,6 +234,7 @@ collections:
         widget: string
         required: false
         hint: What they do with RKC, e.g. "Presenting partner of Lake Michigan Night".
+      - { name: order, label: Display order, widget: number, value_type: int, required: false, hint: "Optional. 1 shows first. Partners without a number follow, A to Z." }
       - { name: start_season, label: First season, widget: number, value_type: int, required: false }
       - { name: active, label: Active, widget: boolean, default: true }
 
