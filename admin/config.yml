@@ -304,6 +304,16 @@ singletons:
         required: false
         pattern: ['^https://', 'Must be a full link starting with https://']
         hint: The embed link for the donation form, from Zeffy. Leave blank to hide the form.
+      - name: rosters
+        label: League roster links
+        widget: object
+        required: false
+        hint: Each team page shows a roster button when its link is filled in. Update every season.
+        fields:
+          - { name: season, label: Roster season, widget: string, required: false, hint: 'Shown on the button, e.g. "2026" makes "View the 2026 Roster"' }
+          - { name: usl2, label: Men (USL League Two) roster link, widget: string, required: false, pattern: ['^https://', 'Must be a full link starting with https://'] }
+          - { name: uslw, label: Women (USL W League) roster link, widget: string, required: false, pattern: ['^https://', 'Must be a full link starting with https://'] }
+          - { name: mwpl, label: MWPL roster link, widget: string, required: false, pattern: ['^https://', 'Must be a full link starting with https://'] }
       - name: cleanups
         label: Lake cleanup dates
         label_singular: Cleanup

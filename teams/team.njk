@@ -27,6 +27,10 @@ eleventyComputed:
     <p class="label label--quiet">{{ team.league }}{% if settings.season_label %} · {{ settings.season_label }}{% endif %}</p>
     <h1>{{ team.pageTitle or (team.code | rkcName) }}</h1>
     <p class="hero__sub">{{ team.intro }}</p>
+    {%- set rosterLink = settings.rosters and settings.rosters[team.code] %}
+    {%- if rosterLink %}
+    <div class="btn-row"><a class="btn btn--secondary" href="{{ rosterLink }}">View the {% if settings.rosters.season %}{{ settings.rosters.season }} {% endif %}Roster</a></div>
+    {%- endif %}
     {%- if team.photo %}
     <img class="hero__photo" src="{{ team.photo.src }}" srcset="{{ team.photo.srcSmall }} 800w, {{ team.photo.src }} 1400w" sizes="(min-width: 64em) 560px, 100vw" alt="{{ team.photo.alt }}" width="1400" height="933">
     {%- endif %}

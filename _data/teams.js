@@ -18,6 +18,7 @@ export default [
   {
     code: "uslw",
     league: "USL W League",
+    pageTitle: "RKC Third Coast Women",
     logo: { src: "/images/leagues/uslw.webp", width: 96, height: 56 },
     playForm: "/play/#women",
     intro:
@@ -26,6 +27,7 @@ export default [
   {
     code: "mwpl",
     league: "Midwest Premier League",
+    pageTitle: "RKC Third Coast MWPL",
     // Round badge shown larger so it carries the same weight as the USL logos.
     logo: { src: "/images/leagues/mwpl.webp", width: 80, height: 80, large: true },
     playForm: "/play/#men",
