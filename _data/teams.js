@@ -3,6 +3,13 @@ export default [
   {
     code: "usl2",
     league: "USL League Two",
+    // Team page H1 and browser title. Cards elsewhere keep the short name.
+    pageTitle: "RKC Third Coast Men",
+    photo: {
+      src: "/images/teams/usl2-1400.webp",
+      srcSmall: "/images/teams/usl2-800.webp",
+      alt: "RKC Third Coast men's players hugging and celebrating together during a match against River Light FC",
+    },
     logo: { src: "/images/leagues/usl2.webp", width: 93, height: 56 },
     playForm: "/play/#men",
     intro:
