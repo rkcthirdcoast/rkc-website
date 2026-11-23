@@ -3,6 +3,13 @@ export default [
   {
     code: "usl2",
     league: "USL League Two",
+    // Team page H1 and browser title. Cards elsewhere keep the short name.
+    pageTitle: "RKC Third Coast Men",
+    photo: {
+      src: "/images/teams/usl2-1400.webp",
+      srcSmall: "/images/teams/usl2-800.webp",
+      alt: "RKC Third Coast men's players hugging and celebrating together during a match against River Light FC",
+    },
     logo: { src: "/images/leagues/usl2.webp", width: 93, height: 56 },
     playForm: "/play/#men",
     intro:
@@ -11,6 +18,12 @@ export default [
   {
     code: "uslw",
     league: "USL W League",
+    pageTitle: "RKC Third Coast Women",
+    photo: {
+      src: "/images/teams/uslw-1400.webp",
+      srcSmall: "/images/teams/uslw-800.webp",
+      alt: "RKC Third Coast women's players smiling and celebrating together in front of the goal during a home match against Rochester FC",
+    },
     logo: { src: "/images/leagues/uslw.webp", width: 96, height: 56 },
     playForm: "/play/#women",
     intro:
@@ -19,6 +32,7 @@ export default [
   {
     code: "mwpl",
     league: "Midwest Premier League",
+    pageTitle: "RKC Third Coast MWPL",
     // Round badge shown larger so it carries the same weight as the USL logos.
     logo: { src: "/images/leagues/mwpl.webp", width: 80, height: 80, large: true },
     playForm: "/play/#men",

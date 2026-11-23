@@ -6,8 +6,8 @@ pagination:
   alias: team
 permalink: "/teams/{{ team.code }}/"
 eleventyComputed:
-  title: "{{ team.code | rkcName }}"
-  seoTitle: "{{ team.code | rkcName }} · RKC Third Coast FC"
+  title: "{{ team.pageTitle or (team.code | rkcName) }}"
+  seoTitle: "{{ team.pageTitle or (team.code | rkcName) }} · RKC Third Coast FC"
   description: "Roster, coaches, schedule and news for RKC's {{ team.league }} team."
 ---
 {%- from "partials/match.njk" import matchCard -%}
@@ -21,12 +21,19 @@ eleventyComputed:
 {%- set posts = (collections.news or []) | byTag(team.code) | reverse | head(3) -%}
 {%- set season = matches | seasonResults(team.code) -%}
 {%- from "partials/match.njk" import fixtureRow -%}
-<section class="hero">
+<section class="hero{% if team.photo %} hero--photo{% endif %}">
   <div class="hero__shade"></div>
   <div class="wrap">
     <p class="label label--quiet">{{ team.league }}{% if settings.season_label %} · {{ settings.season_label }}{% endif %}</p>
-    <h1>{{ team.code | rkcName }}</h1>
+    <h1>{{ team.pageTitle or (team.code | rkcName) }}</h1>
     <p class="hero__sub">{{ team.intro }}</p>
+    {%- set rosterLink = settings.rosters and settings.rosters[team.code] %}
+    {%- if rosterLink %}
+    <div class="btn-row"><a class="btn btn--secondary" href="{{ rosterLink }}">View the {% if settings.rosters.season %}{{ settings.rosters.season }} {% endif %}Roster</a></div>
+    {%- endif %}
+    {%- if team.photo %}
+    <img class="hero__photo" src="{{ team.photo.src }}" srcset="{{ team.photo.srcSmall }} 800w, {{ team.photo.src }} 1400w" sizes="(min-width: 64em) 560px, 100vw" alt="{{ team.photo.alt }}" width="1400" height="933">
+    {%- endif %}
   </div>
 </section>
 

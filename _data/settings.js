@@ -8,4 +8,5 @@ export default () =>
     banner_link: "",
     tickets: {},
     press: {},
+    rosters: {},
   });

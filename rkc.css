@@ -209,6 +209,7 @@ body::before {   /* paints the phone's status-bar band in the header color */
   padding-block: var(--s8) var(--s7);
 }
 .hero__sub { font-size: var(--fs-md); max-width: 32rem; color: #e8e4e4; }
+.hero__photo { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--radius); }   /* Team pages: team photo, below the text on phones */
 .hero__crest { display: none; }   /* Home: large club crest in the hero, desktop only (header crest covers phones) */
 
 /* ---------- Match card ---------- */
@@ -426,6 +427,9 @@ div.player__photo, div.news-card__img { border: 1px solid var(--line); }   /* em
   .brand__crest { height: 52px; }
   .hero--crest .wrap { grid-template-columns: 1fr auto; column-gap: var(--s7); }
   .hero--crest .wrap > * { grid-column: 1; }
+  .hero--photo .wrap { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: var(--s7); }
+  .hero--photo .wrap > * { grid-column: 1; }
+  .hero--photo .hero__photo { grid-column: 2; grid-row: 1 / span 4; align-self: center; }   /* Team pages: photo beside the team name on desktop */
   .hero--crest .hero__crest { display: block; grid-column: 2; grid-row: 1 / span 4; align-self: center; width: 200px; height: auto; }
   .roster { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .partners { grid-template-columns: repeat(6, minmax(0, 1fr)); }
