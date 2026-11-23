@@ -6,8 +6,8 @@ pagination:
   alias: team
 permalink: "/teams/{{ team.code }}/"
 eleventyComputed:
-  title: "{{ team.pageTitle or (team.code | rkcName) }}"
-  seoTitle: "{{ team.pageTitle or (team.code | rkcName) }} · RKC Third Coast FC"
+  title: "{{ team.code | rkcName }}"
+  seoTitle: "{{ team.code | rkcName }} · RKC Third Coast FC"
   description: "Roster, coaches, schedule and news for RKC's {{ team.league }} team."
 ---
 {%- from "partials/match.njk" import matchCard -%}
@@ -25,7 +25,7 @@ eleventyComputed:
   <div class="hero__shade"></div>
   <div class="wrap">
     <p class="label label--quiet">{{ team.league }}{% if settings.season_label %} · {{ settings.season_label }}{% endif %}</p>
-    <h1>{{ team.pageTitle or (team.code | rkcName) }}</h1>
+    <h1>{{ team.code | rkcName }}</h1>
     <p class="hero__sub">{{ team.intro }}</p>
     {%- set rosterLink = settings.rosters and settings.rosters[team.code] %}
     {%- if rosterLink %}
