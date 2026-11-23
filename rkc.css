@@ -325,8 +325,11 @@ div.player__photo, div.news-card__img { border: 1px solid var(--line); }   /* em
 .partner {
   display: grid; place-items: center; aspect-ratio: 3 / 2; padding: var(--s4);
   background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius);
+  min-height: 0; overflow: hidden;   /* wide logos never stretch the tile */
 }
-.partner img { max-height: 56px; width: auto; filter: grayscale(1); opacity: .85; transition: filter .2s, opacity .2s; }
+.partner img { max-height: 56px; max-width: 100%; min-width: 0; width: auto; object-fit: contain; filter: grayscale(1); opacity: .85; transition: filter .2s, opacity .2s; }
+.grid--3 > .stack { align-content: start; }   /* Partners page: captions line up under each tile */
+.grid--3 .partner img { max-height: 96px; max-width: 70%; height: auto; object-fit: contain; }   /* bigger logos in the big tiles */
 .partner:hover img { filter: none; opacity: 1; }
 
 /* ---------- Forms ---------- */
