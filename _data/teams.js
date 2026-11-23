@@ -11,6 +11,7 @@ export default [
   {
     code: "uslw",
     league: "USL W League",
+    logo: { src: "/images/leagues/uslw.webp", width: 96, height: 56 },
     playForm: "/play/#women",
     intro:
       "Our women's team plays in the USL W League, the pre-professional summer league for women's soccer. The roster mixes local players with college talent from across the country, and the standard is the same as the men's side.",
