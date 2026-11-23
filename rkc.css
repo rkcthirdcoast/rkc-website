@@ -285,7 +285,9 @@ body::before {   /* paints the phone's status-bar band in the header color */
   transform: scaleX(0); transform-origin: left; transition: transform .2s;
 }
 .team-card:hover::after, .team-card:focus-visible::after { transform: scaleX(1); }
-.team-card__logo { position: absolute; top: var(--s5); right: var(--s5); width: auto; height: 56px; max-width: 40%; object-fit: contain; object-position: right top; }   /* league logo, top right */
+.team-card__logo { justify-self: end; align-self: start; width: auto; height: 56px; max-width: 40%; object-fit: contain; object-position: right top; }   /* league logo, top right; the card grows so it never covers the text */
+.team-card:has(.team-card__logo) { grid-template-rows: 1fr auto auto auto; align-content: stretch; }
+.team-card__logo--lg { height: 80px; }   /* round badges, so they match the rectangular logos */
 
 /* ---------- Pillars ---------- */
 .pillar { display: grid; gap: var(--s2); padding-top: var(--s4); border-top: 2px solid var(--ink); }
