@@ -46,6 +46,9 @@ permalink: /
     {{ matchCard(nextMatch, next=true) }}
     {%- else %}
     {% include "partials/season-card.njk" %}
+    {%- if settings.offseason_photo %}
+    <img class="home-photo" src="{{ settings.offseason_photo }}" alt="{{ settings.offseason_photo_alt }}" width="1400" height="933" loading="lazy">
+    {%- endif %}
     {%- endif %}
     {#- Latest result is hidden in the offseason so an old score never sits on the homepage. -#}
     {%- if inSeason and lastResult %}

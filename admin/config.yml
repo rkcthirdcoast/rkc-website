@@ -289,6 +289,16 @@ singletons:
         default: offseason
         hint: Offseason the day after the last home match. In season the day the fixture list is entered.
       - { name: season_label, label: Current season label, widget: string, hint: 'e.g. "2027 season"' }
+      - name: offseason_photo
+        label: Offseason home page photo
+        widget: image
+        required: false
+        hint: Shown next to the "schedule coming soon" card in the offseason. A wide team photo works best.
+      - name: offseason_photo_alt
+        label: Offseason photo description (alt text)
+        widget: string
+        required: false
+        hint: What the photo shows, for people using screen readers, e.g. "The men's team lined up arm in arm after a match".
       - name: banner_text
         label: Header banner text
         widget: string
