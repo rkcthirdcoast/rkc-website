@@ -3,6 +3,7 @@ export default [
   {
     code: "usl2",
     league: "USL League Two",
+    logo: { src: "/images/leagues/usl2.webp", width: 152, height: 56 },
     playForm: "/play/#men",
     intro:
       "Our men's team plays in USL League Two, the national summer league for college and pre-professional players. Players keep their college eligibility and spend June and July in matches that get noticed.",
@@ -10,6 +11,7 @@ export default [
   {
     code: "uslw",
     league: "USL W League",
+    logo: { src: "/images/leagues/uslw.webp", width: 96, height: 56 },
     playForm: "/play/#women",
     intro:
       "Our women's team plays in the USL W League, the pre-professional summer league for women's soccer. The roster mixes local players with college talent from across the country, and the standard is the same as the men's side.",
@@ -17,6 +19,7 @@ export default [
   {
     code: "mwpl",
     league: "Midwest Premier League",
+    logo: { src: "/images/leagues/mwpl.webp", width: 56, height: 56 },
     playForm: "/play/#men",
     // Division confirmed by Tim, 2026-10-23.
     intro:

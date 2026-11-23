@@ -285,6 +285,7 @@ body::before {   /* paints the phone's status-bar band in the header color */
   transform: scaleX(0); transform-origin: left; transition: transform .2s;
 }
 .team-card:hover::after, .team-card:focus-visible::after { transform: scaleX(1); }
+.team-card__logo { position: absolute; top: var(--s5); right: var(--s5); width: auto; height: 56px; max-width: 40%; object-fit: contain; object-position: right top; }   /* league logo, top right */
 
 /* ---------- Pillars ---------- */
 .pillar { display: grid; gap: var(--s2); padding-top: var(--s4); border-top: 2px solid var(--ink); }
