@@ -60,8 +60,8 @@ permalink: /
   <div class="wrap">
     <div class="section__head"><h2 id="teams-h">Three teams. One club</h2></div>
     <div class="grid grid--3">
-      {%- for t in ["usl2", "uslw", "mwpl"] %}
-      <a class="team-card" href="/teams/{{ t }}/"><span class="label label--quiet">{{ t | teamLabel }}</span><span class="team-card__name">{{ t | rkcName }}</span><span class="label">Meet the Squad</span></a>
+      {%- for t in teams %}
+      <a class="team-card" href="/teams/{{ t.code }}/">{% if t.logo %}<img class="team-card__logo" src="{{ t.logo }}" alt="" width="64" height="64" loading="lazy">{% endif %}<span class="label label--quiet">{{ t.code | teamLabel }}</span><span class="team-card__name">{{ t.code | rkcName }}</span><span class="label">Meet the Squad</span></a>
       {%- endfor %}
     </div>
   </div>

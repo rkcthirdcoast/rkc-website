@@ -14,7 +14,7 @@ permalink: /teams/
     </div>
     <div class="grid grid--3">
       {%- for t in teams %}
-      <a class="team-card" href="/teams/{{ t.code }}/"><span class="label label--quiet">{{ t.league }}</span><span class="team-card__name">{{ t.code | rkcName }}</span><span class="label">Meet the Squad</span></a>
+      <a class="team-card" href="/teams/{{ t.code }}/">{% if t.logo %}<img class="team-card__logo" src="{{ t.logo }}" alt="" width="64" height="64" loading="lazy">{% endif %}<span class="label label--quiet">{{ t.league }}</span><span class="team-card__name">{{ t.code | rkcName }}</span><span class="label">Meet the Squad</span></a>
       {%- endfor %}
     </div>
   </div>

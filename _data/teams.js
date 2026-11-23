@@ -17,6 +17,7 @@ export default [
   {
     code: "mwpl",
     league: "Midwest Premier League",
+    logo: "/images/leagues/mwpl.webp",
     playForm: "/play/#men",
     // Division confirmed by Tim, 2026-10-23.
     intro:
