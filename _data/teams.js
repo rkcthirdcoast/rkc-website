@@ -3,6 +3,7 @@ export default [
   {
     code: "usl2",
     league: "USL League Two",
+    logo: { src: "/images/leagues/usl2.webp", width: 152, height: 56 },
     playForm: "/play/#men",
     intro:
       "Our men's team plays in USL League Two, the national summer league for college and pre-professional players. Players keep their college eligibility and spend June and July in matches that get noticed.",
@@ -17,7 +18,7 @@ export default [
   {
     code: "mwpl",
     league: "Midwest Premier League",
-    logo: "/images/leagues/mwpl.webp",
+    logo: { src: "/images/leagues/mwpl.webp", width: 56, height: 56 },
     playForm: "/play/#men",
     // Division confirmed by Tim, 2026-10-23.
     intro:
