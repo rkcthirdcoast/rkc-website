@@ -1,6 +1,8 @@
-name: "Razor Sharp Fitness"
+name: Razor Sharp Fitness
 category: club
 logo: /images/uploads/partners/razor-sharp-fitness.webp
 website: https://razorsharpfit.com
-activation: "Official fitness center. Train where the team trains"
+activation: Official fitness center
 active: true
+description: |
+  Razor Sharp Fitness is the official fitness center of RKC Third Coast. More than just a fitness center, they offer state-of-the-art training spaces, innovative equipment, and expert support to help you reach your goals. Visit [razorsharpfit.com](https://razorsharpfit.com/) to train where the team trains.

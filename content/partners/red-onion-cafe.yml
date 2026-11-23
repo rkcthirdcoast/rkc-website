@@ -1,6 +1,10 @@
-name: "Red Onion Café"
+name: Red Onion Café
 category: club
 logo: /images/uploads/partners/red-onion-cafe.webp
 website: https://redonionracine.com
-activation: "Post-game meals for the team, from 555 Main Street in Racine"
+activation: Post-game meals
 active: true
+description: |
+  Red Onion Café is the official post-game meal provider for the RKC Third Coast side. Red Onion Café is located at 555 Main Street here in Racine. For breakfast, lunch or catering, Red Onion Café is your first choice.
+
+  Visit [redonionracine.com](https://redonionracine.com/) for their menu or to book an event.

@@ -7,6 +7,16 @@ permalink: /partners/
 {%- set active = partners | activeWithLogo -%}
 {%- set club = active | byCategory("club") -%}
 {%- set community = active | byCategory("community") -%}
+{%- macro partnerRow(p) %}
+      <article class="partner-row">
+        <a class="partner" href="{{ p.website or '/partners/' }}"><img src="{{ p.logo }}" alt="{{ p.name }}" loading="lazy"></a>
+        <div class="prose">
+          {% if p.activation %}<p class="label label--quiet">{{ p.activation }}</p>{% endif %}
+          <h3>{{ p.name }}</h3>
+          {% if p.description %}{{ p.description | simpleText | safe }}{% elif p.website %}<p><a href="{{ p.website }}">{{ p.website | replace("https://", "") | replace("www.", "") }}</a></p>{% endif %}
+        </div>
+      </article>
+{%- endmacro %}
 <section class="section">
   <div class="wrap stack">
     <h1>Our partners</h1>
@@ -18,13 +28,8 @@ permalink: /partners/
 <section class="section section--mist" aria-labelledby="club-partners-h">
   <div class="wrap">
     <div class="section__head"><h2 id="club-partners-h">Club partners</h2></div>
-    <div class="grid grid--3">
-      {%- for p in club %}
-      <div class="stack">
-        <a class="partner" href="{{ p.website or '#' }}"><img src="{{ p.logo }}" alt="{{ p.name }}" loading="lazy"></a>
-        {% if p.activation %}<p class="match__venue">{{ p.activation }}</p>{% endif %}
-      </div>
-      {%- endfor %}
+    <div class="partner-list">
+      {%- for p in club %}{{ partnerRow(p) }}{%- endfor %}
     </div>
   </div>
 </section>
@@ -34,13 +39,8 @@ permalink: /partners/
 <section class="section" aria-labelledby="community-h">
   <div class="wrap">
     <div class="section__head"><h2 id="community-h">Community partners</h2></div>
-    <div class="grid grid--3">
-      {%- for p in community %}
-      <div class="stack">
-        <a class="partner" href="{{ p.website or '#' }}"><img src="{{ p.logo }}" alt="{{ p.name }}" loading="lazy"></a>
-        {% if p.activation %}<p class="match__venue">{{ p.activation }}</p>{% endif %}
-      </div>
-      {%- endfor %}
+    <div class="partner-list">
+      {%- for p in community %}{{ partnerRow(p) }}{%- endfor %}
     </div>
   </div>
 </section>

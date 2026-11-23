@@ -45,6 +45,12 @@ export default function (eleventyConfig) {
     return { year: latest, list, w, d: list.length - w - l, l };
   });
   eleventyConfig.addFilter("head", (list, n) => (list || []).slice(0, n));
+  // Partner descriptions: plain text, blank line = new paragraph, [text](https://...) = link. Everything else is escaped.
+  eleventyConfig.addFilter("simpleText", (text) => {
+    const esc = (t) => String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    return String(text || "").trim().split(/\n\s*\n/).map((para) =>
+      "<p>" + esc(para.trim()).replace(/\[([^\]]+)\]\((https:\/\/[^\s)]+)\)/g, '<a href="$2">$1</a>') + "</p>").join("\n");
+  });
   eleventyConfig.addFilter("activeWithLogo", (list) => (list || []).filter((p) => p.active !== false && p.logo));
   eleventyConfig.addFilter("alumniList", (list) => (list || []).filter((p) => p.alumni));
   // "Sample City SC" -> "SCS": stand-in badge when an opponent has no logo

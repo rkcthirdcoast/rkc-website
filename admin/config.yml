@@ -234,6 +234,11 @@ collections:
         widget: string
         required: false
         hint: What they do with RKC, e.g. "Presenting partner of Lake Michigan Night".
+      - name: description
+        label: Description
+        widget: text
+        required: false
+        hint: 'Shown on the Partners page under the name. Leave a blank line for a new paragraph. Links: [ecu.com](https://www.ecu.com/)'
       - { name: order, label: Display order, widget: number, value_type: int, required: false, hint: "Optional. 1 shows first. Partners without a number follow, A to Z." }
       - { name: start_season, label: First season, widget: number, value_type: int, required: false }
       - { name: active, label: Active, widget: boolean, default: true }
